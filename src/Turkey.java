@@ -14,7 +14,7 @@ public class Turkey extends DomesticAnimal{
     }
 
     public void makeProduct(){
-
+        System.out.println(2);
     }
 
 }

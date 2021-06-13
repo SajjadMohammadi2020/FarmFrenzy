@@ -3,7 +3,7 @@ public class Buffalo extends DomesticAnimal{
     public static final int buffaloSellPrice = 240 ;
     public static final int buffaloLife = 100 ;
 
-    public Buffalo(int x , int y , AllOfAnimals allOfAnimals ){
+    public Buffalo(int x , int y ){
         this.buyPrice = buffaloBuyPrice ;
         this.sellPrice = buffaloSellPrice ;
         this.life = buffaloLife ;

@@ -3,6 +3,11 @@ public class Animal {
     int x ;
     int y ;
     String name ;
+
+    public void makeProduct(){
+
+    }
+
     public void makeAnimal(){
 
     }
