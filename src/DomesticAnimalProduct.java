@@ -1,4 +1,10 @@
 public class DomesticAnimalProduct {
-    int buyPrice ;
-    int time;
+    int sellPrice ;
+    String name ;
+    int x ;
+    int y ;
+    DomesticAnimalProduct(){}
+    public void Turn(){
+        System.out.println(this.name + " " + this.x + " " + this.y );
+    }
 }

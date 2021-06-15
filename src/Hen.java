@@ -2,6 +2,7 @@ public class Hen extends DomesticAnimal{
     public static final int henBuyPrice = 100 ;
     public static final int henSellPrice = 80 ;
     public static final int henLife = 100 ;
+    public static final int henProductTime = 2 ;
 
     public Hen (int x , int y ){
         this.life = henLife;
@@ -10,10 +11,12 @@ public class Hen extends DomesticAnimal{
         this.x = x ;
         this.y = y ;
         this.time = 0 ;
-        this.name = "H" ;
+        this.name = "Hen" ;
+        this.productTime = henProductTime ;
+        this.ground = ground ;
     }
     public void makeProduct(){
-        System.out.println(1);
+        Egg egg = new Egg(this.x , this.y ) ;
     }
 
 

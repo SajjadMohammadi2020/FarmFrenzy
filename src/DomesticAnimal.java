@@ -8,7 +8,6 @@ public class DomesticAnimal extends Animal {
     int time ;
     int productTime ;
 
-    DomesticAnimalProduct product ;
     public void feed(){
         this.life=100 ;
         //destroy grass
@@ -57,5 +56,6 @@ public class DomesticAnimal extends Animal {
         if(this.life==0){
             death();
         }
+        System.out.println(this.name + " " + this.x + " " + this.y );
     }
 }
