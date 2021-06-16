@@ -85,7 +85,7 @@ public class DomesticAnimal extends Animal {
     }
 
     public void death(){
-        
+
     }
 
     public void makeProduct(){
