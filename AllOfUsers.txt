@@ -1,0 +1,14 @@
+[
+  {
+    "maxLevel": 1,
+    "userName": "Sajjad",
+    "password": "2512",
+    "coins": 0
+  },
+  {
+    "maxLevel": 1,
+    "userName": "Ali",
+    "password": "88",
+    "coins": 0
+  }
+]

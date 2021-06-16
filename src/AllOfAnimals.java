@@ -162,10 +162,10 @@ public class AllOfAnimals {
     }
 
     //حرکت رندم واسه حیوانات وحشی
-    public int[] randomMoveWildAnimal(int x , int y ){
-        int[] result = new int[2];
-
-    }
+//    public int[] randomMoveWildAnimal(int x , int y ){
+//        int[] result = new int[2];
+//        return result ;
+//    }
 
     //حرکت رندم واسه حیوانات اهلی
     public int[] randomMoveDomesticAnimal(int x , int y ){
@@ -251,20 +251,28 @@ public class AllOfAnimals {
 
     //ذخیره کردن حیوانات در فایل
     public void writeAnimals(){
+        writeFile(this.domesticAnimalsFile,domesticAnimals);
+        writeFile(this.wildAnimalsFile,wildAnimals);
+        writeFile(this.otherAnimalsFile,otherAnimals);
+    }
+
+    //نوشتن یک اری لیست دلخواه در فایل دلخواه
+    public void writeFile(File file , ArrayList animal){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try {
-            FileWriter fileWriter = new FileWriter(this.file);
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(this.file,this.animals);
-        } catch (Exception e){
+            FileWriter fileWriter = new FileWriter(file);
+            String json = gson.toJson(animal);
+            fileWriter.write(json);
+            fileWriter.close();
+        }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     //خواندن حیوانات در ابتدای بازی از فایل
     public void readAnimals(ArrayList animal , String type , File file ){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             ArrayList lines = getLines(file);
             String obj = "" ;
             for (int i = 0; i < lines.size(); i++) {
@@ -276,15 +284,15 @@ public class AllOfAnimals {
                     obj +=x ;
                     switch (type){
                         case "Domestic" :
-                            DomesticAnimal animal1 = objectMapper.readValue(obj,DomesticAnimal.class);
+                            DomesticAnimal animal1 = gson.fromJson(obj,DomesticAnimal.class);
                             animal.add(animal1);
                             break;
                         case "Wild" :
-                            WildAnimal animal2 = objectMapper.readValue(obj,WildAnimal.class);
+                            WildAnimal animal2 = gson.fromJson(obj,WildAnimal.class);
                             animal.add(animal2);
                             break;
                         case "Other" :
-                            OtherAnimals animal3 = objectMapper.readValue(obj,OtherAnimals.class);
+                            OtherAnimals animal3 = gson.fromJson(obj,OtherAnimals.class);
                             animal.add(animal3);
                             break;
                         default:
@@ -312,6 +320,7 @@ public class AllOfAnimals {
                 String x = myReader.nextLine();
                 result.add(x);
             }
+            myReader.close();
             return result ;
         } catch (Exception e){
             e.printStackTrace();
