@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+//کلاسی که بر فعالیت همه حیوانات نظارت دارد
 public class AllOfAnimals {
+
+    //متغیرهای موجود در این کلاس
     String userName ;
     int level ;
     ArrayList<DomesticAnimal> domesticAnimals ;
@@ -21,6 +24,7 @@ public class AllOfAnimals {
 
     public static AllOfAnimals allOfAnimals_instance ;
 
+    //کانستراکتور برایوت برای این کلاس
     private AllOfAnimals(String userName , int level ){
         this.userName = userName ;
         this.level = level ;
@@ -32,6 +36,7 @@ public class AllOfAnimals {
         createAnimalFile("Other");
     }
 
+    //ایجاد فایل حیوانات ( وحشی . اهلی . متفرقه ) متناسب با نام کاربر و شماره مرحله
     public void createAnimalFile(String str){
         ArrayList animal = new ArrayList() ;
         File file = new File(this.userName+","+this.level+","+str+"Animals");
@@ -53,7 +58,7 @@ public class AllOfAnimals {
         }
     }
 
-
+    //ایجاد یک نمونه از این کلاس ( تک نمونه )
     public static AllOfAnimals getAllOfAnimals_instance(String userName,int level){
         if(allOfAnimals_instance==null){
             allOfAnimals_instance = new AllOfAnimals(userName, level);
@@ -96,7 +101,7 @@ public class AllOfAnimals {
         writeAnimals();
     }
 
-    //turn vase domesticAnimal ha
+    //تابع ترن برای حیوانات اهلی
     public void DomesticAnimalTurn(){
         for (int i = 0; i < this.domesticAnimals.size(); i++) {
             DomesticAnimal animal = domesticAnimals.get(i);
@@ -132,7 +137,7 @@ public class AllOfAnimals {
         }
     }
 
-    //turn vase wildanimal ha
+    //تابع ترن برای حیوانات وحشی
     public void WildAnimalTurn(){
         for (int i = 0; i < wildAnimals.size(); i++) {
             WildAnimal animal = wildAnimals.get(i);
@@ -151,14 +156,18 @@ public class AllOfAnimals {
         }
     }
 
-    //turn vase otheranimal ha
+    //تابع ترن واسه حیوانات متفرقه
     public void OtherAnimalTurn(){
 
     }
 
-    //harekat e random vase wildAnimal ha
+    //حرکت رندم واسه حیوانات وحشی
+    public int[] randomMoveWildAnimal(int x , int y ){
+        int[] result = new int[2];
 
-    //harekat e random vase domesticAnimal ha
+    }
+
+    //حرکت رندم واسه حیوانات اهلی
     public int[] randomMoveDomesticAnimal(int x , int y ){
         int newLoc[] = getTwoNumber(x,y);
         while(!isAllowed(newLoc[0],newLoc[1])){
@@ -167,7 +176,7 @@ public class AllOfAnimals {
         return newLoc ;
     }
 
-    //taieen e location badi DomesticAniaml
+    //تعیین خانه بعدی برای حیوانات اهلی
     public int[] getTwoNumber(int x , int y ){
         Random random = new Random();
         int result[] = new int[2] ;
@@ -181,13 +190,13 @@ public class AllOfAnimals {
         return result ;
     }
 
-    //taiien in ke aia loction baadi mojaze ia na
+    //تعیین مجاز بودن خانه بعدی
     public boolean isAllowed(int x , int y ){
         boolean result = (x<=6&&y<=6)&&(isEmpty(x,y));
         return result ;
     }
 
-    //taieen e in ke aia khoone ie entekhabi khalie ia na
+    //تعیین خالی بودن خانه بعدی
     public boolean isEmpty(int x , int y ){
         boolean result = true ;
         for (int i = 0; i < domesticAnimals.size(); i++) {
@@ -222,25 +231,25 @@ public class AllOfAnimals {
 //        }
 //    }
 
-    //ijad e domesticAnimal
+    //ایجاد حیوان اهلی
     public void makeDomesticAnimal(DomesticAnimal domesticAnimal){
         this.domesticAnimals.add(domesticAnimal);
         writeAnimals();
     }
 
-    //ijad e wildAnimal
+    //ایجاد حیوان وحشی
     public void makeWildAnimal(WildAnimal wildAnimal){
         this.wildAnimals.add(wildAnimal);
         writeAnimals();
     }
 
-    //ijad e otheranimal
+    //ایجاد حیوان متفرقه
     public void makeOtherAnimal(OtherAnimals otherAnimals){
         this.otherAnimals.add(otherAnimals);
         writeAnimals();
     }
 
-    //save kardan e animal ha dar file
+    //ذخیره کردن حیوانات در فایل
     public void writeAnimals(){
         try {
             FileWriter fileWriter = new FileWriter(this.file);
@@ -252,7 +261,7 @@ public class AllOfAnimals {
 
     }
 
-    //khandan animal ha az file dar ebteda ie bazi
+    //خواندن حیوانات در ابتدای بازی از فایل
     public void readAnimals(ArrayList animal , String type , File file ){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -294,7 +303,7 @@ public class AllOfAnimals {
 
     }
 
-    //ijad e araie ee az khat ha barai e khandan
+    //ایجاد آرایه ای از خط ها برای ساخت حیوانات از فایل
     public ArrayList<String> getLines(File file){
         try {
             ArrayList<String> result = new ArrayList<String>();
