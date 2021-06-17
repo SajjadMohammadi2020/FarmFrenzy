@@ -17,7 +17,7 @@ public class DomesticAnimalProduct {
         System.out.println(this.name + " " + this.x + " " + this.y );
     }
 
-
+    //کانستراکتور این کلاس
     DomesticAnimalProduct(String name , int x, int y){
         if(name.equals("egg")||name.equals("feather")||name.equals("milk")){
             this.name = name ;
@@ -30,5 +30,6 @@ public class DomesticAnimalProduct {
         } else {
             System.out.println("wrong DomesticAnimalProduct!");
         }
+        AllOfDomesticProducts.addDomesticAnimalProduct(this);
     }
 }

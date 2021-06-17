@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//کلاسی برای نظارت بر کل کاربران
 public class AllOfUsers {
     //متغیرهای این کلاس
     ArrayList<User> users ;
@@ -32,7 +33,9 @@ public class AllOfUsers {
     }
 
     public void addUser(User user){
-        this.users.add(user);
+        if(!isExist(user.userName)){
+            this.users.add(user);
+        }
         writeFile();
     }
 
@@ -96,7 +99,7 @@ public class AllOfUsers {
 
     //تابعی که در آغاز برنامه برای شناسایی کاربر قدیمی یا ورود کاربر جدید استفاده میشود.
     public User SignUpLogin(){
-        System.out.printf("CHOOSE:\nSIGNUP\nLOGIN\n");
+        System.out.printf("CHOOSE:\nSIGNUP\nLOG IN\n");
         Scanner input = new Scanner(System.in);
         String str= input.nextLine();
         String[][] strings = {{"log in","LOG IN"},{"signup","SIGNUP"}};
@@ -106,13 +109,16 @@ public class AllOfUsers {
         User user ;
             if(str.equals("SIGNUP")){
                 user = SIGNUP();
+                this.addUser(user);
                 return user ;
             }else if(str.equals("LOG IN")){
                 user = LOGIN();
+                this.addUser(user);
                 return user ;
             }else {
                 System.out.println("Wrong Input!");
                 user = SignUpLogin() ;
+                this.addUser(user);
                 return user ;
             }
     }

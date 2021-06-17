@@ -22,7 +22,7 @@ public class DomesticAnimal extends Animal {
     public static final int buffaloSellPrice = 240 ;
     public static final int buffaloLife = 100 ;
     public static final int buffaloProductTime = 5 ;
-    public static final String buffaloProduct = "egg" ;
+    public static final String buffaloProduct = "milk" ;
 
     //متغیر های موجود در این کلاس
     int sellPrice ;
@@ -34,7 +34,7 @@ public class DomesticAnimal extends Animal {
     //کانستراکتور این کلاس
     DomesticAnimal(String name , int x , int y ){
         if(name.equals("Hen")||name.equals("Turkey")||name.equals("Buffalo")){
-            this.name = name ; this.x = x ; this.y =y ;
+            this.name = name ; this.x = x ; this.y =y ; this.time =  0 ;
             switch (name){
                 case "Hen" :
                     this.buyPrice = henBuyPrice ;
@@ -59,6 +59,13 @@ public class DomesticAnimal extends Animal {
                     break;}
         } else {
             System.out.println("Wrong DomesticAnimal!");
+        }
+    }
+
+    //تابعی برای تولید محصول
+    public void makeProduct(){
+        if(this.time%this.productTime==0){
+            DomesticAnimalProduct product = new DomesticAnimalProduct(this.product,this.x,this.y);
         }
     }
 

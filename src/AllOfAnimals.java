@@ -109,31 +109,25 @@ public class AllOfAnimals {
             if(animal.life<50){
                 //move for food
             }else {
-                int[] newLoc = randomMoveDomesticAnimal(animal.x,animal.y);
-                animal.x = newLoc[0]; animal.y = newLoc[1] ;
+                int[] newLoc = newLoc(animal.x,animal.y);
+                for (int j = 0; j < 10; j++) {
+                    if(isEmpty(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1){
+                        animal.x = newLoc[0];
+                        animal.y = newLoc[1];
+                    } else {
+                        newLoc = newLoc(animal.x,animal.y);
+                    }
+                }
             }
             if(animal.life<50&&this.ground.ground[animal.x][animal.y].hasGrass){
                 animal.life = 100 ;
                 //DESTROY GRASS
                 this.ground.ground[animal.x-1][animal.y-1].hasGrass = false ;
             }
+            animal.time++;
+            animal.makeProduct();
             animal.life*=9;animal.life/=10;
             domesticAnimals.set(i,animal);
-        }
-        checkAndRemoveDomesticAnimals();
-        int hen = 0  ; int buffalo = 0 ; int turkey = 0 ;
-        for (int i = 0; i < domesticAnimals.size(); i++) {
-            DomesticAnimal animal = domesticAnimals.get(i);
-            if(animal.name.equals("Hen")){
-                hen++ ;
-                System.out.println("Hen " + hen +" "+ animal.x+" "+animal.y);
-            } else if(animal.name.equals("Buffalo")){
-                buffalo++ ;
-                System.out.println("Buffalo " + buffalo +" "+ animal.x+" "+animal.y);
-            } else if(animal.name.equals("Turkey")){
-                turkey++ ;
-                System.out.println("Turkey " + turkey +" "+ animal.x+" "+animal.y);
-            }
         }
     }
 
@@ -141,60 +135,208 @@ public class AllOfAnimals {
     public void WildAnimalTurn(){
         for (int i = 0; i < wildAnimals.size(); i++) {
             WildAnimal animal = wildAnimals.get(i);
-            //
-            Random random = new Random();
-            int b = animal.x , c = animal.y  ;
-            int a = random.nextInt(4);
-            switch (a){
-                case 0 : b-- ; break; //left
-                case 1 : c-- ; break; //up
-                case 2 : b++ ; break; //right
-                case 3 : c++ ; break; //below
-                default: System.out.println("Wrong random number!!"); break;
+            int newLoc[] = newLoc(animal.x,animal.y);
+            for (int j = 0; j < 10; j++) {
+                if(!hasWild(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1){
+                    animal.x= newLoc[0] ;
+                    animal.y = newLoc[1] ;
+                } else {
+                    newLoc = newLoc(animal.x,animal.y);
+                }
             }
-            if(b<=6&&c<=6){}
+            DomesticAnimal animal1 = (DomesticAnimal) getAnimal("Domestic",animal.x,animal.y);
+            if(animal1!=null){
+                animal1.life=0;
+            }
+            OtherAnimals animal2 = (OtherAnimals) getAnimal("Other",animal.x,animal.y);
+            if(animal2!=null){
+                if(animal2.name.equals("Cat")){
+                    animal2.life = 0 ;
+                } else if (animal2.name.equals("Dog")){
+                    animal2.life = 0 ;
+                    animal.life = 0 ;
+                }
+            }
         }
     }
+
+
 
     //تابع ترن واسه حیوانات متفرقه
     public void OtherAnimalTurn(){
-
-    }
-
-    //حرکت رندم واسه حیوانات وحشی
-//    public int[] randomMoveWildAnimal(int x , int y ){
-//        int[] result = new int[2];
-//        return result ;
-//    }
-
-    //حرکت رندم واسه حیوانات اهلی
-    public int[] randomMoveDomesticAnimal(int x , int y ){
-        int newLoc[] = getTwoNumber(x,y);
-        while(!isAllowed(newLoc[0],newLoc[1])){
-            newLoc  = getTwoNumber(x,y);
+        for (int i = 0; i < this.otherAnimals.size(); i++) {
+            OtherAnimals animal = this.otherAnimals.get(i);
+            int[] newLoc = newLoc(animal.x,animal.y);
+            if(animal.name.equals("Cat")){
+                for (int j = 0; j < 10; j++) {
+                    if(isEmpty(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1){
+                        animal.x = newLoc[0] ;
+                        animal.y = newLoc[1] ;
+                    } else {
+                        newLoc = newLoc(animal.x,animal.y);
+                    }
+                }
+                //COllecccccccccccccccccccccccccccccccctttttttttttttttttttttttttttttttttttttttttt
+            }else if(animal.name.equals("Dog")){
+                for (int j = 0; j < 10; j++) {
+                    if(getAnimal("Domestic",newLoc[0],newLoc[1])==null&&
+                    getAnimal("Other",newLoc[0],newLoc[1])==null&&newLoc[0]<=6&&newLoc[1]<=6
+                    &&newLoc[0]>=1&&newLoc[1]>=1){
+                        animal.x = newLoc[0];
+                        animal.y = newLoc[1];
+                    }else {
+                        newLoc = newLoc(animal.x,animal.y);
+                    }
+                }
+                if(getAnimal("Wild",animal.x,animal.y)!=null){
+                    WildAnimal animal1 = (WildAnimal) getAnimal("Wild",animal.x,animal.y);
+                    animal.life = 0 ;
+                    animal1.life = 0 ;
+                }
+            }
         }
-        return newLoc ;
     }
 
-    //تعیین خانه بعدی برای حیوانات اهلی
-    public int[] getTwoNumber(int x , int y ){
+    //تابع ترن برای کل حیوانات ( شامل اهلی و وحشی و متفرقه )
+    public void TurnAllOfAnimals(){
+        this.DomesticAnimalTurn();
+        this.WildAnimalTurn();
+        this.OtherAnimalTurn();
+        checkAndRemoveDomesticAnimals();
+        checkAndRemoveWildAnimals();
+        checkAndRemoveOtherAnimals();
+        this.showDomesticAnimals();
+        this.showOtherAnimals();
+        this.showWildAnimals();
+    }
+
+
+    //تابعی برای نشان دادن اطلاعات حیوانات اهلی
+    public void showDomesticAnimals(){
+        int hen = 0 ; int turkey = 0 ; int buffalo = 0 ;
+        for (int i = 0; i < this.domesticAnimals.size(); i++) {
+            DomesticAnimal animal = this.domesticAnimals.get(i);
+            switch (animal.name){
+                case "Hen" :
+                    hen++;
+                    System.out.println(animal.name + " " + hen + " " + animal.x +" " + animal.y);
+                    break;
+                case "Turkey" :
+                    turkey++;
+                    System.out.println(animal.name + " " + turkey+ " " + animal.x +" " + animal.y);
+                    break;
+                case "Buffalo" :
+                    buffalo++;
+                    System.out.println(animal.name + " " + buffalo+ " " + animal.x +" " + animal.y);
+                    break;
+                default: System.out.println("Wrong Domestic Animal!!"); break;
+            }
+        }
+    }
+
+    //تابعی برای نشان دادن اطلاعات حیوانات وحشی
+    public void showWildAnimals(){
+     int lion = 0 ; int bear = 0 ; int tiger = 0 ;
+        for (int i = 0; i < this.wildAnimals.size(); i++) {
+            WildAnimal animal = this.wildAnimals.get(i);
+            switch (animal.name){
+                case "Lion" :
+                    lion++;
+                    System.out.println(animal.name +" "+lion+" "+animal.x+" "+animal.y);
+                    break;
+                case "Bear" :
+                    bear++;
+                    System.out.println(animal.name +" "+bear+" "+animal.x+" "+animal.y);
+                    break;
+                case "Tiger":
+                    tiger++;
+                    System.out.println(animal.name +" "+tiger+" "+animal.x+" "+animal.y);
+                    break;
+                default: System.out.println("Wrong Wild Animal!!"); break;
+            }
+        }
+    }
+
+    //تابعی برای نشان دادن اطلاعات حیوانات متفرقه
+    public void showOtherAnimals(){
+        int cat = 0 ; int dog= 0 ;
+        for (int i = 0; i < this.otherAnimals.size(); i++) {
+            OtherAnimals animal = this.otherAnimals.get(i);
+            switch (animal.name){
+                case "Cat" :
+                    cat++;
+                    System.out.println(animal.name +" "+cat+" "+animal.x+" "+animal.y);
+                    break;
+                case "Dog" :
+                    dog++;
+                    System.out.println(animal.name +" "+dog+" "+animal.x+" "+animal.y);
+                    break;
+                default:System.out.println("Wrong OtherAnimal!!");break;
+            }
+        }
+    }
+
+    //تابع برای تحویل حیوان با استفاده از موقعیتش
+    public Animal getAnimal(String name , int x , int y ){
+        Animal result = new Animal();
+        switch (name){
+            case "Domestic" :
+                for (int i = 0; i < this.domesticAnimals.size(); i++) {
+                    DomesticAnimal animal = this.domesticAnimals.get(i);
+                    if(animal.x==x&&animal.y==y){
+                        result = animal ;
+                    }
+                }
+                break;
+            case "Wild" :
+                for (int i = 0; i < this.wildAnimals.size(); i++) {
+                    WildAnimal animal = this.wildAnimals.get(i);
+                    if(animal.x==x&&animal.y==y){
+                        result=animal;
+                    }
+                }
+                break;
+            case "Other" :
+                for (int i = 0; i < this.otherAnimals.size(); i++) {
+                    OtherAnimals animal = this.otherAnimals.get(i);
+                    if(animal.x==x && animal.y==y){
+                        result = animal ;
+                    }
+                }
+                break;
+            default: System.out.println("Wrong type animal!!");
+            break;
+        }
+        return result ;
+    }
+
+    //تابع برای مشخص کردن موقعیت جدید
+    public int[] newLoc(int x , int y ){
         Random random = new Random();
-        int result[] = new int[2] ;
-        int a = random.nextInt(4);
-        switch (a) {
-            case 0 : result[0] = x -1 ; result[1] = y ; //left
-            case 1 : result[0] = x  ; result[1] = y-1 ; //up
-            case 2 : result[0] = x +1 ; result[1] = y ; //right
-            case 3 : result[0] = x ; result[1] = y+1 ; //below
+        int[] result = new int[2];
+        int z = random.nextInt(4);
+        switch (z){
+            case 0 : result[0]=x-1; result[1]=y; break;//چپ
+            case 1 : result[0]=x;result[1]=y-1; break;//بالا
+            case 2 : result[0] = x+1  ; result[1] = y ; break;//راست
+            case 3 : result[0] = x ; result[1] = y+1 ; break;//پایین
+            default: System.out.println("Wrong random number!");
         }
         return result ;
     }
 
-    //تعیین مجاز بودن خانه بعدی
-    public boolean isAllowed(int x , int y ){
-        boolean result = (x<=6&&y<=6)&&(isEmpty(x,y));
+    //تابعی که مشخص میکند در خانه مورد نظر حیوان وحشی وجود دارد یا نه
+    public boolean hasWild(int x , int y ){
+        boolean result = false ;
+        for (int i = 0; i < this.wildAnimals.size(); i++) {
+            WildAnimal animal = this.wildAnimals.get(i);
+            if(animal.x==x&&animal.y == y ){
+                result = true ;
+            }
+        }
         return result ;
     }
+
 
     //تعیین خالی بودن خانه بعدی
     public boolean isEmpty(int x , int y ){
@@ -219,17 +361,6 @@ public class AllOfAnimals {
         }
         return result ;
     }
-//    public void makeAnimal(Animal animal){
-//        if (animal.getClass()==DomesticAnimal.class){
-//            makeDomesticAnimal(()animal);
-//        }else if(animal.getClass()==WildAnimal.class){
-//
-//        } else if (animal.getClass()==OtherAnimals.class){
-//
-//        } else {
-//            System.out.println("Wrong Making Animal!!");
-//        }
-//    }
 
     //ایجاد حیوان اهلی
     public void makeDomesticAnimal(DomesticAnimal domesticAnimal){
