@@ -14,4 +14,8 @@ public class Grass {
     public int getColumn(){return column;}
 
     public void setNumber(){this.number++;}
+
+    public void decreaseNumber(){this.number--;}
+
+    public int getNumber(){return this.number;}
 }

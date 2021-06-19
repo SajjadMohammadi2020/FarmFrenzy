@@ -40,7 +40,7 @@ public class AllOfAnimals {
     //ایجاد فایل حیوانات ( وحشی . اهلی . متفرقه ) متناسب با نام کاربر و شماره مرحله
     public void createAnimalFile(String str){
         ArrayList animal = new ArrayList() ;
-        File file = new File(this.userName+","+this.level+","+str+"Animals");
+        File file = new File(this.userName+","+this.level+","+str+"Animals.txt");
         switch (str){
             case "Domestic" : animal = this.domesticAnimals ; this.domesticAnimalsFile = file ; break;
             case "Wild" : animal = this.wildAnimals ; this.wildAnimalsFile = file ; break;
@@ -124,13 +124,32 @@ public class AllOfAnimals {
                 for (int j = 0; j < Manager.grasses.size(); j++) {
                     if(animal.x==Manager.grasses.get(i).getRow()&&animal.y==Manager.grasses.get(i).getColumn()){
                         animal.life = 100 ;
-                        Manager.grasses.remove(i);
+                        ///
+                        ///
+                        ///
+                        System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " has feed!");
+                        ///
+                        ///
+                        ///
+                        Manager.grasses.get(i).decreaseNumber();
+                        if(Manager.grasses.get(i).getNumber()==0){
+                            Manager.grasses.remove(i);
+                        }
                     }
                 }
             }
             animal.time++;
             animal.makeProduct();
             animal.life*=9;animal.life/=10;
+            if(animal.life<=0){
+                ///
+                ///
+                ///
+                System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is dead!");
+                ///
+                ///
+                ///
+            }
             domesticAnimals.set(i,animal);
         }
     }
@@ -153,6 +172,13 @@ public class AllOfAnimals {
             DomesticAnimal animal1 = (DomesticAnimal) getAnimal("Domestic",animal.x,animal.y);
             if(animal1!=null){
                 animal1.life=0;
+                ///
+                ///
+                ///
+                System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal1.name);
+                ///
+                ///
+                ///
             }
             OtherAnimals animal2 = (OtherAnimals) getAnimal("Other",animal.x,animal.y);
             if(animal2!=null){
@@ -187,6 +213,13 @@ public class AllOfAnimals {
                         Goods good = Manager.goodsOnGround.get(i);
                         Manager.goods.add(good);
                         Manager.goodsOnGround.remove(i);
+                        ///
+                        ///
+                        ///
+                        System.out.println(good.getName()+" was taken to the warehouse!");
+                        ///
+                        ///
+                        ///
                     }
                 }
             }else if(animal.name.equals("Dog")){
@@ -204,6 +237,13 @@ public class AllOfAnimals {
                     WildAnimal animal1 = (WildAnimal) getAnimal("Wild",animal.x,animal.y);
                     animal.life = 0 ;
                     animal1.life = 0 ;
+                    ///
+                    ///
+                    ///
+                    System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " fight with " + animal1.name);
+                    ///
+                    ///
+                    ///
                 }
             }
         }
@@ -393,12 +433,40 @@ public class AllOfAnimals {
         }
         DomesticAnimal animal = new DomesticAnimal(animalName,x,y);
         this.domesticAnimals.add(animal);
+        ///
+        ///
+        ///
+        System.out.println(animalName + " in location " + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
+        ///
+        ///
+        ///
         writeAnimals();
     }
 
     //ایجاد حیوان وحشی
-    public void makeWildAnimal(WildAnimal wildAnimal){
-        this.wildAnimals.add(wildAnimal);
+    public void makeWildAnimal(String name){
+        String animalName = "" ;
+        switch (name){
+            case "lion" : animalName = "Lion" ; break;
+            case "bear" : animalName = "Bear" ; break;
+            case "tiger" : animalName = "Tiger" ; break;
+            default:
+                System.out.println("Wrong WildAnimal!"); break;
+        }
+        Random random = new Random();
+        int x = -1 ; int y = -1 ;
+        while (hasWild(x,y)||x<1||y<1){
+            x = random.nextInt(6) ; y = random.nextInt(6);
+            x++ ; y++ ;
+        }
+        WildAnimal animal = new WildAnimal(animalName,x,y);
+        ///
+        ///
+        ///
+        System.out.println(animalName + "in location" + animal.x + " , " + animal.y + " is created!" );
+        ///
+        ///
+        ///
         writeAnimals();
     }
 
@@ -406,7 +474,17 @@ public class AllOfAnimals {
         WildAnimal animal = (WildAnimal) getAnimal("Wild" , x , y );
         if(animal!=null){
         animal.caged = true ;
-        animal.life--;}
+        animal.life--;
+        if(animal.life==0){
+           ///
+           ///
+           ///
+            System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
+            ///
+            ///
+            ///
+        }
+        }
     }
 
     public void antiCage(){
@@ -434,6 +512,13 @@ public class AllOfAnimals {
         }
         OtherAnimals animal = new OtherAnimals(animalName,x,y);
         this.otherAnimals.add(animal);
+        ///
+        ///
+        ///
+        System.out.println(animalName + "in location" + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
+        ///
+        ///
+        ///
         writeAnimals();
     }
 
@@ -466,11 +551,10 @@ public class AllOfAnimals {
             String obj = "" ;
             for (int i = 0; i < lines.size(); i++) {
                 String x = (String)lines.get(i);
-                System.out.println(x);
                 if(x.equals("[")||x.equals("]")){
 
-                } else if(x.equals("  },")){
-                    obj +=x ;
+                } else if(x.contains("  }")){
+                    obj +="  }" ;
                     switch (type){
                         case "Domestic" :
                             DomesticAnimal animal1 = gson.fromJson(obj,DomesticAnimal.class);

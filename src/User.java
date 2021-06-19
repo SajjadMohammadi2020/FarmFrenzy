@@ -12,4 +12,6 @@ public class User {
         this.maxLevel = 1 ;
         this.coins = 0 ;
     }
+
+    User(){}
 }

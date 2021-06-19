@@ -30,6 +30,11 @@ public class Manager {
         this.animals = AllOfAnimals.getAllOfAnimals_instance(this.user.userName,this.user.maxLevel);
     }
 
+    public void inquiry(){
+        animals.inquiry();
+        System.out.println("\n");
+    }
+
     public boolean isExisted(String name){
         for(WorkShops workShop : workShops){
             if(workShop.getWorkshopName().equals(name))
@@ -321,8 +326,10 @@ public class Manager {
             checkGoods();
             checkTruck();
             checkWell();
+            System.out.println("\n");
         }
         System.out.println(passedTurn);
+
     }
 
     public void buyAnimal(String name){

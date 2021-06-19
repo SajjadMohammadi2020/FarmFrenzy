@@ -14,7 +14,7 @@ public class AllOfDomesticProducts {
     }
 
     //تابعی برای ایجاد فقظ و فقط یک نمونه ار کلاس
-    public AllOfDomesticProducts getAllOfDomesticProducts_instance(){
+    public static AllOfDomesticProducts getAllOfDomesticProducts_instance(){
         if(allOfDomesticProducts_instance==null){
             allOfDomesticProducts_instance = new AllOfDomesticProducts();
             return allOfDomesticProducts_instance ;

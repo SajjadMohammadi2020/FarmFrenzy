@@ -87,6 +87,10 @@ public class Input {
                 int x = Integer.parseInt(caging[1]);
                 int y = Integer.parseInt(caging[2]);
                 manager.cage(x,y);
+            } else if(input.toLowerCase(Locale.ROOT).equals("inquiry")){
+                manager.inquiry();
+            } else {
+                System.out.println("Wrong input!!");
             }
         }
     }
