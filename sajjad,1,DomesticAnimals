@@ -1,0 +1,13 @@
+[
+  {
+    "sellPrice": 80,
+    "buyPrice": 100,
+    "time": 1,
+    "productTime": 2,
+    "product": "egg",
+    "life": 90,
+    "x": 2,
+    "y": 4,
+    "name": "Hen"
+  }
+]

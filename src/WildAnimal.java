@@ -19,26 +19,31 @@ public class WildAnimal extends Animal{
     //متغیرهای موجود در این کلاس
     int sellPrice ;
     int speed ;
+    boolean caged ;
+    int max_life ;
 
     //کانستراکتور این کلاس
     WildAnimal(String name , int x , int y ){
         if(name.equals("Bear")||name.equals("Lion")||name.equals("Tiger")){
-            this.name = name ; this.x = x ; this.y = y ;
+            this.name = name ; this.x = x ; this.y = y ; this.caged = false ;
             switch (name){
                 case "Bear" :
                     this.sellPrice = bearSellPrice ;
                     this.life = bearLife ;
                     this.speed = bearSpeed ;
+                    this.max_life = bearLife ;
                     break;
                 case "Lion" :
                     this.sellPrice = lionSellPrice ;
                     this.life = lionLife ;
                     this.speed = lionSpeed ;
+                    this.max_life = lionLife ;
                     break;
                 case "Tiger" :
                     this.sellPrice = tigerSellPrice ;
                     this.life = tigerLife ;
                     this.speed = tigerSpeed ;
+                    this.max_life = tigerLife ;
                     break;
             }
         } else {

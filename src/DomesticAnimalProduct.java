@@ -30,6 +30,7 @@ public class DomesticAnimalProduct {
         } else {
             System.out.println("wrong DomesticAnimalProduct!");
         }
+        Goods good = new Goods(name,this.x,this.y,this.sellPrice);
         AllOfDomesticProducts.addDomesticAnimalProduct(this);
     }
 }

@@ -20,12 +20,13 @@ public class AllOfAnimals {
     File domesticAnimalsFile ;
     File wildAnimalsFile ;
     File otherAnimalsFile;
-    Ground ground ;
+
 
     public static AllOfAnimals allOfAnimals_instance ;
 
     //کانستراکتور برایوت برای این کلاس
     private AllOfAnimals(String userName , int level ){
+
         this.userName = userName ;
         this.level = level ;
         domesticAnimals = new ArrayList<>() ;
@@ -119,10 +120,13 @@ public class AllOfAnimals {
                     }
                 }
             }
-            if(animal.life<50&&this.ground.ground[animal.x][animal.y].hasGrass){
-                animal.life = 100 ;
-                //DESTROY GRASS
-                this.ground.ground[animal.x-1][animal.y-1].hasGrass = false ;
+            if(animal.life<50){
+                for (int j = 0; j < Manager.grasses.size(); j++) {
+                    if(animal.x==Manager.grasses.get(i).getRow()&&animal.y==Manager.grasses.get(i).getColumn()){
+                        animal.life = 100 ;
+                        Manager.grasses.remove(i);
+                    }
+                }
             }
             animal.time++;
             animal.makeProduct();
@@ -133,8 +137,10 @@ public class AllOfAnimals {
 
     //تابع ترن برای حیوانات وحشی
     public void WildAnimalTurn(){
+        antiCage();
         for (int i = 0; i < wildAnimals.size(); i++) {
             WildAnimal animal = wildAnimals.get(i);
+            animal.caged = false ;
             int newLoc[] = newLoc(animal.x,animal.y);
             for (int j = 0; j < 10; j++) {
                 if(!hasWild(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1){
@@ -176,7 +182,13 @@ public class AllOfAnimals {
                         newLoc = newLoc(animal.x,animal.y);
                     }
                 }
-                //COllecccccccccccccccccccccccccccccccctttttttttttttttttttttttttttttttttttttttttt
+                for (int j = 0; j < Manager.goodsOnGround.size(); j++) {
+                    if(animal.x==Manager.goodsOnGround.get(i).getRow()&&animal.y==Manager.goodsOnGround.get(i).getColumn()){
+                        Goods good = Manager.goodsOnGround.get(i);
+                        Manager.goods.add(good);
+                        Manager.goodsOnGround.remove(i);
+                    }
+                }
             }else if(animal.name.equals("Dog")){
                 for (int j = 0; j < 10; j++) {
                     if(getAnimal("Domestic",newLoc[0],newLoc[1])==null&&
@@ -202,14 +214,14 @@ public class AllOfAnimals {
         this.DomesticAnimalTurn();
         this.WildAnimalTurn();
         this.OtherAnimalTurn();
-        checkAndRemoveDomesticAnimals();
-        checkAndRemoveWildAnimals();
-        checkAndRemoveOtherAnimals();
+        inquiry();
+    }
+
+    public void inquiry(){
         this.showDomesticAnimals();
         this.showOtherAnimals();
         this.showWildAnimals();
     }
-
 
     //تابعی برای نشان دادن اطلاعات حیوانات اهلی
     public void showDomesticAnimals(){
@@ -334,8 +346,10 @@ public class AllOfAnimals {
                 result = true ;
             }
         }
+        TurnAllOfAnimals();
         return result ;
     }
+
 
 
     //تعیین خالی بودن خانه بعدی
@@ -363,8 +377,22 @@ public class AllOfAnimals {
     }
 
     //ایجاد حیوان اهلی
-    public void makeDomesticAnimal(DomesticAnimal domesticAnimal){
-        this.domesticAnimals.add(domesticAnimal);
+    public void makeDomesticAnimal(String name){
+        String animalName = "" ;
+        switch (name){
+            case "hen" : animalName = "Hen" ;break;
+            case "turkey" : animalName = "Turkey" ; break;
+            case "buffalo" : animalName = "Buffalo" ; break;
+            default: System.out.println("Wrong animal!!"); break;
+        }
+        int x=-1 ,y=-1 ;
+        while (!isEmpty(x,y)||x<1||y<1){
+            Random random = new Random() ;
+            x = random.nextInt(6) ; y = random.nextInt(6);
+            x++ ; y++ ;
+        }
+        DomesticAnimal animal = new DomesticAnimal(animalName,x,y);
+        this.domesticAnimals.add(animal);
         writeAnimals();
     }
 
@@ -374,11 +402,41 @@ public class AllOfAnimals {
         writeAnimals();
     }
 
+    public void cage(int x , int y ){
+        WildAnimal animal = (WildAnimal) getAnimal("Wild" , x , y );
+        if(animal!=null){
+        animal.caged = true ;
+        animal.life--;}
+    }
+
+    public void antiCage(){
+        for (int i = 0; i < this.wildAnimals.size(); i++) {
+            WildAnimal animal = this.wildAnimals.get(i);
+            if(animal.caged==false&&animal.life<animal.max_life){
+                animal.life++;
+            }
+        }
+    }
+
     //ایجاد حیوان متفرقه
-    public void makeOtherAnimal(OtherAnimals otherAnimals){
-        this.otherAnimals.add(otherAnimals);
+    public void makeOtherAnimal(String name){
+        String animalName = "" ;
+        switch (name){
+            case "cat" : animalName = "Cat" ; break;
+            case "dog" : animalName = "Dog" ; break;
+            default: System.out.println("Wrong OtherAnimal!!!"); break;
+        }
+        int x=-1 ,y=-1 ;
+        while (!isEmpty(x,y)||x<1||y<1){
+            Random random = new Random() ;
+            x = random.nextInt(6) ; y = random.nextInt(6);
+            x++ ; y++ ;
+        }
+        OtherAnimals animal = new OtherAnimals(animalName,x,y);
+        this.otherAnimals.add(animal);
         writeAnimals();
     }
+
 
     //ذخیره کردن حیوانات در فایل
     public void writeAnimals(){
