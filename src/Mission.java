@@ -22,11 +22,11 @@ public class Mission {
     public static final int max_egg_second_product[] = {3,4,5,6,7} ;//مقدار نان مورد نیاز در هر مرحله
     public static final int max_feather_second_product[] = {3,4,5,6,7} ;//مقدار پیراهن مورد نیاز در هر مرحله
     public static final int max_milk_second_product [] = {2,3,4,5,6};//مقدار بستنی مورد نیاز در هر مرحله
-    public static final int max_mission_coins[] = {50,60,70,80,90} ;//مقدار سکه مورد نیاز در هر مرحله
+    public static final int max_mission_coins[] = {150,160,170,180,190} ;//مقدار سکه مورد نیاز در هر مرحله
     public static final int max_hen [] = {4,5,6,7,8};//تعداد مرغ مورد نیاز هر مرحله
     public static final int max_turkey[] = {4,5,6,7,8} ;//تعداد بوقلمون مورد نیاز در هر مرحله
     public static final int max_buffalo[] = {3,4,5,6,7} ;//تعداد بوفالو مورد نیاز در هر مرحله
-    public static final String wildAnimals[][][] = { { {"Lion","10"} , {"Lion","25"} }  ,  { {"Lion","12" } , {"Lion","23" } , {"Lion","35"} } ,
+    public static final String wildAnimals[][][] = { { {"Lion","2"} , {"Lion","8"} }  ,  { {"Lion","12" } , {"Lion","23" } , {"Lion","35"} } ,
             { {"Lion","15"} , {"Bear","24"} , {"Lion" , "40"} } , { {"Lion","15" } , { "Bear","30" } , {"Tiger","50"}} ,
             { {"Bear","15"} , {"Tiger","35"} , {"Tiger","50"}}};//حیوانات وحشی و زمان فرود آنها در هر مرحله
 
@@ -35,9 +35,11 @@ public class Mission {
     int levelNumber ;
     Level[] levels ;
 
+
     //کانستراکتور این کلاس
     Mission(){
-        readFile();
+        //readFile();
+        createNewMission();
     }
 
     //تابعی برای ایجاد ماموریت های مراحل جدید
@@ -45,12 +47,13 @@ public class Mission {
         this.levelNumber = max_level_number ;
         this.levels = new Level[levelNumber] ;
         for (int i = 0; i < levelNumber; i++) {
-            this.levels[i] = new Level(coins_at_first[i],max_egg[i],max_feather[i],
+            this.levels[i] = new Level( coins_at_first[i],max_egg[i],max_feather[i],
                     max_milk[i],max_egg_first_product[i],max_feather_first_product[i],max_milk_first_product[i],
                     max_egg_second_product[i],max_feather_second_product[i],max_milk_second_product[i],
                     max_mission_coins[i],max_hen[i],max_turkey[i],max_buffalo[i],wildAnimals[i],max_time_level[i],
                     coins_for_reward[i] );
         }
+        writeFile();
     }
 
     //تابعی برای نوشتن ذخیره ماموریت ها در فایل

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Manager {
 
+    Level level ;
     User user ;
     AllOfAnimals animals ;
     static int passedTurn = 0;
@@ -25,13 +26,18 @@ public class Manager {
     static boolean wellProcess = false;
     final static int TIME_REQUIRED_FOR_WELL = 3;
 
-    Manager(User user){
+    Manager(User user , Level level){
         this.user =  user ;
+        this.level = level ;
+        this.level.setUser(this.user);
+        coins = this.level.coins ;
         this.animals = AllOfAnimals.getAllOfAnimals_instance(this.user.userName,this.user.maxLevel);
     }
 
     public void inquiry(){
         animals.inquiry();
+        showGoodsOnGround();
+        this.level.showMissions();
         System.out.println("\n");
     }
 
@@ -143,7 +149,7 @@ public class Manager {
         return null;
     }
 
-    private Goods getGoodByName(String name){
+    public static Goods getGoodByName(String name){
         for(Goods goods : goods){
             if(goods.getName().equals(name))
                 return goods;
@@ -321,35 +327,79 @@ public class Manager {
     public void passTurn(int n){
         for(int i=1;i<=n;i++) {
             passedTurn++;
-            animals.TurnAllOfAnimals();
+            animals.TurnAllOfAnimals();///
+            showGoodsOnGround();///
             checkWorkshops();
             checkGoods();
             checkTruck();
             checkWell();
+            levelTurn();
             System.out.println("\n");
         }
         System.out.println(passedTurn);
 
     }
 
+
+
+    public void levelTurn(){
+        String wild = this.level.getWildAnimal();
+        if(wild!=null){
+            this.animals.makeWildAnimal(wild);}
+        this.level.egg = getGoodByName("egg").getInventory() ;
+        this.level.feather = getGoodByName("feather").getInventory();
+        this.level.milk = getGoodByName("milk").getInventory();
+        this.level.showMissions();
+        this.level.checkMissions();
+        this.level.time++;
+    }
+
     public void buyAnimal(String name){
         switch (name){
             case "hen" :
                 if(coins>=DomesticAnimal.henBuyPrice){
-                animals.makeDomesticAnimal(name);} break;
+                coins -= DomesticAnimal.henBuyPrice ;
+                this.level.hen++;
+                animals.makeDomesticAnimal(name);
+                }else {
+                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                }
+                break;
             case "turkey" :
                 if(coins>=DomesticAnimal.turkeyBuyPrice){
-                    animals.makeDomesticAnimal(name); } break;
+                    coins -= DomesticAnimal.turkeyBuyPrice ;
+                    this.level.turkey++;
+                    animals.makeDomesticAnimal(name);
+                }else {
+                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                }
+                break;
             case "buffalo" :
                 if(coins>=DomesticAnimal.buffaloBuyPrice){
-                    animals.makeDomesticAnimal(name); } break;
+                    coins -= DomesticAnimal.buffaloBuyPrice ;
+                    this.level.buffalo++;
+                    animals.makeDomesticAnimal(name);
+                }else {
+                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                }
+                break;
             case "cat" :
                 if(coins>=OtherAnimals.catBuyPrice){
-                    animals.makeOtherAnimal(name); } break;
+                    coins -= OtherAnimals.catBuyPrice ;
+                    animals.makeOtherAnimal(name);
+                }else {
+                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                }
+                break;
             case "dog" :
                 if(coins>=OtherAnimals.dogBuyPrice){
-                    animals.makeDomesticAnimal(name);} break;
-            default: System.out.println("Wrong buy animal!!!!!!!"); break;
+                    coins -= OtherAnimals.dogBuyPrice ;
+                    animals.makeDomesticAnimal(name);
+                }else {
+                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                }
+                break;
+            default: System.out.println("Manager : buyAnimal : "+"Wrong buy animal!!!!!!!"); break;
         }
     }
 
@@ -357,5 +407,23 @@ public class Manager {
         animals.cage(x,y);
     }
 
+    public static int getStoreCapacity(){return storeCapacity ; }
+
+    public void showGoodsOnGround(){
+        System.out.println("Manager : showGoodsOnGround : GoodsOnGroundSize : "+Manager.goodsOnGround.size());
+        for (int i = 0; i < goodsOnGround.size(); i++) {
+            Goods good = goodsOnGround.get(i);
+            System.out.println("Manager : showGoodsOnGround : "+good.getName() + " " + good.getRow() + " " + good.getColumn() );
+        }
+    }
+
+//    public void addProductsToLevel(){
+//        for (int i = 0; i < this.animals.domesticAnimals.size(); i++) {
+//            DomesticAnimal animal = this.animals.domesticAnimals.get(i);
+//            if(animal.name.equals("Hen")&&animal.time%animal.productTime==0) this.level.egg ++ ;
+//            else if(animal.name.equals("Turkey")&&animal.time%animal.productTime==0) this.level.feather++;
+//            else if(animal.name.equals("Buffalo")&&animal.time%animal.productTime==0) this.level.milk++;
+//        }
+//    }
 
 }

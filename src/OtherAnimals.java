@@ -21,7 +21,7 @@ public class OtherAnimals extends Animal{
                     break;
             }
         }else {
-            System.out.println("Wrong OtherAnimal!");
+            System.out.println("OtherAnimals : OtherAnimals : "+"Wrong OtherAnimal!");
         }
     }
 }

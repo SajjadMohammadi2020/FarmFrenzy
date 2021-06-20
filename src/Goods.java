@@ -195,4 +195,6 @@ public class Goods {
     public void useItem(){
         this.inventory -= 1;
     }
+
+
 }

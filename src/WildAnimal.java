@@ -47,7 +47,7 @@ public class WildAnimal extends Animal{
                     break;
             }
         } else {
-            System.out.println("Wrong WildAnimal!");
+            System.out.println("WildAnimal : WildAnimal : "+"Wrong WildAnimal!");
         }
     }
 

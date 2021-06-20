@@ -58,15 +58,19 @@ public class DomesticAnimal extends Animal {
                     this.product = turkeyProduct ;
                     break;}
         } else {
-            System.out.println("Wrong DomesticAnimal!");
+            System.out.println("DomesticAnimal : DomesticAnimal : "+"Wrong DomesticAnimal!");
         }
     }
 
     //تابعی برای تولید محصول
-    public void makeProduct(){
+    public DomesticAnimalProduct makeProduct(){
         if(this.time%this.productTime==0){
             DomesticAnimalProduct product = new DomesticAnimalProduct(this.product,this.x,this.y);
+            Goods good = new Goods(this.product,this.x,this.y);
+//            Manager.goodsOnGround.add(good);
+            return product ;
         }
+        return null ;
     }
 
 }
