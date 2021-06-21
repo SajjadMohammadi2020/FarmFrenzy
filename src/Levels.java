@@ -135,9 +135,9 @@ public class Levels {
         this.finished = false ;
         this.user = null ;
         this.egg = 0  ; this.feather = 0 ;  milk = 0 ; egg_first_product = 0 ;  milk_first_product = 0 ;
-        feather_first_product = 0 ;
+        feather_first_product = 0 ; this.coins = this.coinsAtFirst ;
         egg_second_product = 0 ;  feather_second_product = 0 ; milk_second_product  = 0 ; hen = 0 ;
-        turkey = 0 ;  buffalo = 0 ;  coins = 0 ;  time = 0 ;
+        turkey = 0 ;  buffalo = 0  ;  time = 0 ;
     }
 
 }

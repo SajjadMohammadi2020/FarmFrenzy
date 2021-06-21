@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.*;
@@ -123,7 +124,7 @@ public class AllOfAnimals {
 
             if(animal.life<50){
                 for (int j = 0; j < Manager.grasses.size(); j++) {
-                    if(animal.x==Manager.grasses.get(i).getRow()&&animal.y==Manager.grasses.get(i).getColumn()){
+                    if(animal.x==Manager.grasses.get(j).getRow()&&animal.y==Manager.grasses.get(j).getColumn()){
                         animal.life = 100 ;
                         try {
                             FileHandler fh = new FileHandler("logfile.txt", true);
@@ -137,7 +138,7 @@ public class AllOfAnimals {
                             System.out.println("error!!!");
                         }
                         System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " has feed!");
-                        Manager.grasses.get(i).decreaseNumber();
+                        Manager.grasses.get(j).decreaseNumber();
                         try {
                             FileHandler fh = new FileHandler("logfile.txt", true);
                             SimpleFormatter sf = new SimpleFormatter();
@@ -149,8 +150,8 @@ public class AllOfAnimals {
 
                             System.out.println("error!!!");
                         }
-                        if(Manager.grasses.get(i).getNumber()==0){
-                            Manager.grasses.remove(i);
+                        if(Manager.grasses.get(j).getNumber()==0){
+                            Manager.grasses.remove(j);
                         }
                     }
                 }
@@ -196,6 +197,7 @@ public class AllOfAnimals {
                 ///
                 ///
                 System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal1.name);
+                this.domesticAnimals.remove(animal1);
                 ///
                 ///
                 ///
@@ -208,6 +210,7 @@ public class AllOfAnimals {
                     ///
                     ///
                     System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal2.name);
+                    this.otherAnimals.remove(animal2);
                     ///
                     ///
                     ///
@@ -218,6 +221,8 @@ public class AllOfAnimals {
                     ///
                     ///
                     System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " fighting " + animal2.name);
+                    this.wildAnimals.remove(animal);
+                    this.otherAnimals.remove(animal2);
                     ///
                     ///
                     ///
@@ -237,19 +242,18 @@ public class AllOfAnimals {
                 int k = 0 ;
                 while (k<10&&!(isEmpty(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1)){
                     newLoc = newLoc(animal.x,animal.y);
+                    k++ ;
                 }
                 animal.x = newLoc[0]; animal.y=newLoc[1];
                 for (int j = 0; j < Manager.goodsOnGround.size(); j++) {
-                    if(animal.x==Manager.goodsOnGround.get(i).getRow()&&animal.y==Manager.goodsOnGround.get(i).getColumn()){
-                        Goods good = Manager.goodsOnGround.get(i);
+                    if(animal.x==Manager.goodsOnGround.get(j).getRow()&&animal.y==Manager.goodsOnGround.get(j).getColumn()){
+                        Goods good = Manager.goodsOnGround.get(j);
                         if(good.getSize()<=Manager.getStoreCapacity()){
                             Manager.getGoodByName(good.getName()).setInventory();
-                            String name = good.getName();
-                            Manager.goodsOnGround.remove(i);
                             // ERROR!
-
                             ///
-                            System.out.println( name +" was taken to the warehouse!");
+                            System.out.println( good.getName() + " in location " + animal.x + " " + animal.y +" was taken to the warehouse!");
+                            Manager.goodsOnGround.remove(j);
                             ///
                             ///
                             ///
@@ -280,6 +284,8 @@ public class AllOfAnimals {
                         System.out.println("error!!!");
                     }
                     System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " fight with " + animal1.name);
+                    this.otherAnimals.remove(animal);
+                    this.wildAnimals.remove(animal1);
                     ///
                     ///
                     ///
@@ -294,7 +300,7 @@ public class AllOfAnimals {
         this.DomesticAnimalTurn();
         this.WildAnimalTurn();
         this.OtherAnimalTurn();
-        inquiry();
+        //inquiry();
     }
 
     public void inquiry(){
@@ -306,7 +312,6 @@ public class AllOfAnimals {
     //تابعی برای نشان دادن اطلاعات حیوانات اهلی
     public void showDomesticAnimals(){
         int hen = 0 ; int turkey = 0 ; int buffalo = 0 ;
-        System.out.println(this.domesticAnimals.size());
         for (int i = 0; i < this.domesticAnimals.size(); i++) {
             DomesticAnimal animal = this.domesticAnimals.get(i);
             switch (animal.name){
@@ -513,6 +518,10 @@ public class AllOfAnimals {
                 ///
                 ///
                 System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
+                String name = animal.name.toLowerCase(Locale.ROOT);
+                Goods good = new Goods(name,"animal",animal.x,animal.y);
+                this.wildAnimals.remove(animal);
+                Manager.goodsOnGround.add(good);
                 ///
                 ///
                 ///

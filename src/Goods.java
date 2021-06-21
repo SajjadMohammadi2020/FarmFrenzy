@@ -69,7 +69,6 @@ public class Goods {
             this.type = "final";
             this.timeOutOfStore = 0;
         }
-        Manager.goodsOnGround.add(this);
     }
 
     //کانستراکتور برای تبدیل product به goods
@@ -96,6 +95,18 @@ public class Goods {
             this.price = price;
         }
 
+    }
+
+    //کانستراکتور برای انتقال حیوانات وحشی
+    Goods(String name , String type , int row , int col ){
+        this.name = name ;
+        this.row = row ; this.column = col ; this.type = type ; this.size = 10 ;
+        this.timeToExpire = 5 ; this.timeOutOfStore = 0 ;
+        switch (this.name){
+            case "lion" : this.price = 300; break;
+            case "bear" : this.price = 400; break;
+            case "tiger" : this.price = 500; break;
+        }
     }
 
     //

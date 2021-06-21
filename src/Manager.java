@@ -36,6 +36,7 @@ public class Manager {
         this.level.setUser(this.user);
         coins = this.level.coins ;
         this.animals = AllOfAnimals.getAllOfAnimals_instance(this.user.userName,this.user.maxLevel);
+
     }
 
     public void inquiry(){
@@ -500,6 +501,8 @@ public class Manager {
                     if (row == grasses.get(i).getRow() && column == grasses.get(i).getColumn()) {
                         grasses.get(i).setNumber();
                         well--;
+                        if(isWllIsEmpty())
+                            wellProcess = false ;
                         try {
                             FileHandler fh = new FileHandler("logfile.txt", true);
                             SimpleFormatter sf = new SimpleFormatter();
@@ -516,6 +519,8 @@ public class Manager {
                     else {
                         grasses.add(new Grass(row, column));
                         well--;
+                        if(isWllIsEmpty())
+                            wellProcess = false ;
                         planted = true;
                         try {
                             FileHandler fh = new FileHandler("logfile.txt", true);
@@ -543,18 +548,18 @@ public class Manager {
     }
 
     public void passTurn(int n){
-        System.out.println(n);
         for(int i=1;i<=n;i++) {
             passedTurn++;
             animals.TurnAllOfAnimals();///
-            showGoodsOnGround();
             checkWorkshops();
             checkGoods();
             checkTruck();
             checkWell();
-            levelTurn();
-            System.out.println("\n");
+            System.out.println();
         }
+        animals.inquiry();
+        showGoodsOnGround();
+        levelTurn();
         System.out.println(passedTurn);
 
     }
@@ -666,7 +671,7 @@ public class Manager {
 
                         System.out.println("error!!!");
                     }
-                    animals.makeDomesticAnimal(name);
+                    animals.makeOtherAnimal(name);
                 }else {
                     System.out.println("Not enough money!");
                 }
@@ -684,7 +689,7 @@ public class Manager {
     public void showGoodsOnGround(){
         for (int i = 0; i < goodsOnGround.size(); i++) {
             Goods good = goodsOnGround.get(i);
-            System.out.println("Manager : showGoodsOnGround : "+good.getName() + " " + good.getRow() + " " + good.getColumn() );
+            System.out.println(good.getName() + " " + good.getRow() + " " + good.getColumn() );
         }
     }
 
