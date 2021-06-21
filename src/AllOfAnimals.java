@@ -248,7 +248,7 @@ public class AllOfAnimals {
                 for (int j = 0; j < Manager.goodsOnGround.size(); j++) {
                     if(animal.x==Manager.goodsOnGround.get(j).getRow()&&animal.y==Manager.goodsOnGround.get(j).getColumn()){
                         Goods good = Manager.goodsOnGround.get(j);
-                        if(good.getSize()<=Manager.getStoreCapacity()){
+                        if(good.getSize()<=(Manager.STORE_SIZE-Manager.getStoreCapacity())){
                             Manager.getGoodByName(good.getName()).setInventory();
                             // ERROR!
                             ///
