@@ -31,7 +31,7 @@ public class Main {
                     manager.restartLevel();
                 }
                 }else {
-                    System.out.println("Main : main : "+"Sorry! You dont have access this level!");
+                    System.out.println("Sorry! You dont have access this level!");
                 }
             }else if(str.toLowerCase(Locale.ROOT).equals("settings")){
 
@@ -40,7 +40,7 @@ public class Main {
             }else if(str.toLowerCase(Locale.ROOT).equals("log out")){
 
             }else  {
-                System.out.println("Main : main : "+"wrong input!!");
+                System.out.println("wrong input!!");
             }
         }
     }

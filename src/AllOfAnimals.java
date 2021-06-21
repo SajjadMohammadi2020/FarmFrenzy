@@ -124,7 +124,7 @@ public class AllOfAnimals {
                         ///
                         ///
                         ///
-                        System.out.println("AllOfAnimalS : DomesticAnimalTurn : " + animal.name + " in location " + animal.x + " , " + animal.y + " has feed!");
+                        System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " has feed!");
                         ///
                         ///
                         ///
@@ -142,7 +142,7 @@ public class AllOfAnimals {
                 ///
                 ///
                 ///
-                System.out.println("AllOfAnimals : DomesticAnimalTurn : " + animal.name + " in location " + animal.x + " , " + animal.y + " is dead!");
+                System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " is dead!");
                 this.domesticAnimals.remove(i);
                 ///
                 ///
@@ -150,7 +150,6 @@ public class AllOfAnimals {
             }
 
         }
-        System.out.println("DomesticAnimalTurn");
     }
 
     //تابع ترن برای حیوانات وحشی
@@ -171,7 +170,7 @@ public class AllOfAnimals {
                 ///
                 ///
                 ///
-                System.out.println("AllOfAnimals : WildAnimalTurn : " + animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal1.name);
+                System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal1.name);
                 ///
                 ///
                 ///
@@ -183,7 +182,7 @@ public class AllOfAnimals {
                     ///
                     ///
                     ///
-                    System.out.println("AllOfAnimals : WildAnimalTurn : " + animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal2.name);
+                    System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " killed " + animal2.name);
                     ///
                     ///
                     ///
@@ -193,7 +192,7 @@ public class AllOfAnimals {
                     ///
                     ///
                     ///
-                    System.out.println("AllOfAnimals : WildAnimalTurn : " + animal.name + " in location " + animal.x + " , " + animal.y + " fighting " + animal2.name);
+                    System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " fighting " + animal2.name);
                     ///
                     ///
                     ///
@@ -224,7 +223,7 @@ public class AllOfAnimals {
                             ///
                             ///
                             ///
-                            System.out.println("AllOfAnimals : OtherAnimalTurn : "+ good.getName()+" was taken to the warehouse!");
+                            System.out.println( good.getName()+" was taken to the warehouse!");
                             ///
                             ///
                             ///
@@ -246,7 +245,7 @@ public class AllOfAnimals {
                     ///
                     ///
                     ///
-                    System.out.println("AllOfAnimals : OtherAnimalTurn : "+ animal.name + " in location " + animal.x + " , " + animal.y + " fight with " + animal1.name);
+                    System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " fight with " + animal1.name);
                     ///
                     ///
                     ///
@@ -262,7 +261,6 @@ public class AllOfAnimals {
         this.WildAnimalTurn();
         this.OtherAnimalTurn();
         inquiry();
-        System.out.println("TurnAllOfAnimals");
     }
 
     public void inquiry(){
@@ -274,23 +272,23 @@ public class AllOfAnimals {
     //تابعی برای نشان دادن اطلاعات حیوانات اهلی
     public void showDomesticAnimals(){
         int hen = 0 ; int turkey = 0 ; int buffalo = 0 ;
-        System.out.println("AllOfAnimals : showDomesticAnimals : "+this.domesticAnimals.size());
+        System.out.println(this.domesticAnimals.size());
         for (int i = 0; i < this.domesticAnimals.size(); i++) {
             DomesticAnimal animal = this.domesticAnimals.get(i);
             switch (animal.name){
                 case "Hen" :
                     hen++;
-                    System.out.println("AllOfAnimals : showDomesticAnimals : "+animal.name + " " + hen + " " + animal.life +"% " + animal.x +" " + animal.y);
+                    System.out.println(animal.name + " " + hen + " " + animal.life +"% " + animal.x +" " + animal.y);
                     break;
                 case "Turkey" :
                     turkey++;
-                    System.out.println("AllOfAnimals : showDomesticAnimals : "+animal.name + " " + turkey+ " " + animal.life +"% "+ animal.x +" " + animal.y);
+                    System.out.println(animal.name + " " + turkey+ " " + animal.life +"% "+ animal.x +" " + animal.y);
                     break;
                 case "Buffalo" :
                     buffalo++;
-                    System.out.println("AllOfAnimals : showDomesticAnimals : "+animal.name + " " + buffalo+ " "+ animal.life +"% " + animal.x +" " + animal.y);
+                    System.out.println(animal.name + " " + buffalo+ " "+ animal.life +"% " + animal.x +" " + animal.y);
                     break;
-                default: System.out.println("AllOfAnimals : showDomesticAnimals : "+"Wrong Domestic Animal!!"); break;
+                default: System.out.println("Wrong Domestic Animal!!"); break;
             }
         }
     }
@@ -315,7 +313,7 @@ public class AllOfAnimals {
 //                    break;
 //                default: System.out.println("AllOfAnimals : showWildAnimals : "+"Wrong Wild Animal!!"); break;
 //            }
-            System.out.println("AllOfAnimals : showWildAnimals : "+animal.name +" "+animal.life+" "+animal.x+" "+animal.y);
+            System.out.println(animal.name +" "+animal.life+" "+animal.x+" "+animal.y);
         }
     }
 
@@ -327,13 +325,13 @@ public class AllOfAnimals {
             switch (animal.name){
                 case "Cat" :
                     cat++;
-                    System.out.println("AllOfAnimals : showOtherAnimals : "+animal.name +" "+cat+" "+animal.x+" "+animal.y);
+                    System.out.println(animal.name +" "+cat+" "+animal.x+" "+animal.y);
                     break;
                 case "Dog" :
                     dog++;
-                    System.out.println("AllOfAnimals : showOtherAnimals : "+animal.name +" "+dog+" "+animal.x+" "+animal.y);
+                    System.out.println(animal.name +" "+dog+" "+animal.x+" "+animal.y);
                     break;
-                default:System.out.println("AllOfAnimals : showOtherAnimals : "+"Wrong OtherAnimal!!");break;
+                default:System.out.println("Wrong OtherAnimal!!");break;
             }
         }
     }
@@ -365,7 +363,7 @@ public class AllOfAnimals {
                     }
                 }
                 break;
-            default: System.out.println("AllOfAnimals : getAnimal : "+"Wrong type animal!!");
+            default: System.out.println("Wrong type animal!!");
             break;
         }
         return null ;
@@ -381,7 +379,7 @@ public class AllOfAnimals {
             case 1 : result[0]=x;result[1]=y-1; break;//بالا
             case 2 : result[0] = x+1  ; result[1] = y ; break;//راست
             case 3 : result[0] = x ; result[1] = y+1 ; break;//پایین
-            default: System.out.println("AllOfAnimals : newLoc : "+"Wrong random number!");
+            default: System.out.println("Wrong random number!");
         }
         return result ;
     }
@@ -395,7 +393,6 @@ public class AllOfAnimals {
                 result = true ;
             }
         }
-        //TurnAllOfAnimals();
         return result ;
     }
 
@@ -432,7 +429,7 @@ public class AllOfAnimals {
             case "hen" : animalName = "Hen" ;break;
             case "turkey" : animalName = "Turkey" ; break;
             case "buffalo" : animalName = "Buffalo" ; break;
-            default: System.out.println("AllOfAnimals : makeDomesticAnimal : "+"Wrong animal!!"); break;
+            default: System.out.println("Wrong animal!!"); break;
         }
         int x=-1 ,y=-1 ;
         while (!isEmpty(x,y)||x<1||y<1){
@@ -445,7 +442,7 @@ public class AllOfAnimals {
         ///
         ///
         ///
-        System.out.println("AllOfAnimals : makeDomesticAnimal : "+animalName + " in location " + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
+        System.out.println(animalName + " in location " + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
         ///
         ///
         ///
@@ -454,14 +451,6 @@ public class AllOfAnimals {
 
     //ایجاد حیوان وحشی
     public void makeWildAnimal(String name){
-//        String animalName = "" ;
-//        switch (name){
-//            case "lion" : animalName = "Lion" ; break;
-//            case "bear" : animalName = "Bear" ; break;
-//            case "tiger" : animalName = "Tiger" ; break;
-//            default:
-//                System.out.println("Wrong WildAnimal!"); break;
-//        }
         Random random = new Random();
         int x = -1 ; int y = -1 ;
         while (hasWild(x,y)||x<1||y<1){
@@ -473,7 +462,7 @@ public class AllOfAnimals {
         ///
         ///
         ///
-        System.out.println("AllOfAnimals : makeWildAnimal : "+animal.name + " in location " + animal.x + " , " + animal.y + " is created!" );
+        System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is created!" );
         ///
         ///
         ///
@@ -489,7 +478,7 @@ public class AllOfAnimals {
            ///
            ///
            ///
-            System.out.println("AllOfAnimals : cage : "+animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
+            System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
             ///
             ///
             ///
@@ -512,7 +501,7 @@ public class AllOfAnimals {
         switch (name){
             case "cat" : animalName = "Cat" ; break;
             case "dog" : animalName = "Dog" ; break;
-            default: System.out.println("AllOfAnimals : makeOtherAnimal : "+"Wrong OtherAnimal!!!"); break;
+            default: System.out.println("Wrong OtherAnimal!!!"); break;
         }
         int x=-1 ,y=-1 ;
         while (!isEmpty(x,y)||x<1||y<1){
@@ -525,7 +514,7 @@ public class AllOfAnimals {
         ///
         ///
         ///
-        System.out.println("AllOfAnimals : makeOtherAnimal : "+animalName + " in location " + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
+        System.out.println(animalName + " in location " + animal.x + " , " + animal.y + " is created!\nbuying was successfully!" );
         ///
         ///
         ///

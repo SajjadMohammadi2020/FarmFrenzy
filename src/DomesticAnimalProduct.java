@@ -28,7 +28,7 @@ public class DomesticAnimalProduct {
                 case "milk" : this.sellPrice = milkBuyPrice ; break;
             }
         } else {
-            System.out.println("DomesticAnimalProduct : DomesticAnimalProduct : "+"wrong DomesticAnimalProduct!");
+            System.out.println("wrong DomesticAnimalProduct!");
         }
         AllOfDomesticProducts.addDomesticAnimalProduct(this);
     }

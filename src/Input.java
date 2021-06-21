@@ -24,7 +24,7 @@ public class Input {
         else if(split[1].toLowerCase(Locale.ROOT).equals("ice"))
             manager.buildIceCreamWorkshop();
         else
-            System.out.println("Input : processBuilding : "+"Invalid build order!!!");
+            System.out.println("Invalid build order!!!");
     }
 
     private void processWorking(String[] split){
@@ -90,7 +90,7 @@ public class Input {
             } else if(input.toLowerCase(Locale.ROOT).equals("inquiry")){
                 manager.inquiry();
             } else {
-                System.out.println("Input : run : "+"Wrong input!!");
+                System.out.println("Wrong input!!");
             }
         }
         return input ;

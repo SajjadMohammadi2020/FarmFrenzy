@@ -364,7 +364,7 @@ public class Manager {
                 this.level.hen++;
                 animals.makeDomesticAnimal(name);
                 }else {
-                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                    System.out.println("Not enough money!");
                 }
                 break;
             case "turkey" :
@@ -373,7 +373,7 @@ public class Manager {
                     this.level.turkey++;
                     animals.makeDomesticAnimal(name);
                 }else {
-                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                    System.out.println("Not enough money!");
                 }
                 break;
             case "buffalo" :
@@ -382,7 +382,7 @@ public class Manager {
                     this.level.buffalo++;
                     animals.makeDomesticAnimal(name);
                 }else {
-                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                    System.out.println("Not enough money!");
                 }
                 break;
             case "cat" :
@@ -390,7 +390,7 @@ public class Manager {
                     coins -= OtherAnimals.catBuyPrice ;
                     animals.makeOtherAnimal(name);
                 }else {
-                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                    System.out.println("Not enough money!");
                 }
                 break;
             case "dog" :
@@ -398,10 +398,10 @@ public class Manager {
                     coins -= OtherAnimals.dogBuyPrice ;
                     animals.makeDomesticAnimal(name);
                 }else {
-                    System.out.println("Manager : buyAnimal : "+"Not enough money!");
+                    System.out.println("Not enough money!");
                 }
                 break;
-            default: System.out.println("Manager : buyAnimal : "+"Wrong buy animal!!!!!!!"); break;
+            default: System.out.println("Wrong buy animal!!!!!!!"); break;
         }
     }
 
@@ -412,7 +412,6 @@ public class Manager {
     public static int getStoreCapacity(){return storeCapacity ; }
 
     public void showGoodsOnGround(){
-        System.out.println("Manager : showGoodsOnGround : GoodsOnGroundSize : "+Manager.goodsOnGround.size());
         for (int i = 0; i < goodsOnGround.size(); i++) {
             Goods good = goodsOnGround.get(i);
             System.out.println("Manager : showGoodsOnGround : "+good.getName() + " " + good.getRow() + " " + good.getColumn() );
@@ -449,7 +448,7 @@ public class Manager {
                 this.level.milk_second_product++;
                 break;
             default:
-                System.out.println("Manager : changeInformationLevel : "+"Wrong product!");
+                System.out.println("Wrong product!");
                 break;
         }
     }

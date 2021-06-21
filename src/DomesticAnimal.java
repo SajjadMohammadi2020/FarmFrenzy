@@ -58,7 +58,7 @@ public class DomesticAnimal extends Animal {
                     this.product = turkeyProduct ;
                     break;}
         } else {
-            System.out.println("DomesticAnimal : DomesticAnimal : "+"Wrong DomesticAnimal!");
+            System.out.println("Wrong DomesticAnimal!");
         }
     }
 
@@ -67,7 +67,6 @@ public class DomesticAnimal extends Animal {
         if(this.time%this.productTime==0){
             DomesticAnimalProduct product = new DomesticAnimalProduct(this.product,this.x,this.y);
             Goods good = new Goods(this.product,this.x,this.y);
-//            Manager.goodsOnGround.add(good);
             return product ;
         }
         return null ;
