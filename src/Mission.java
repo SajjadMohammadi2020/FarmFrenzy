@@ -33,7 +33,7 @@ public class Mission {
 
     //متغیر های این کلاس
     int levelNumber ;
-    Level[] levels ;
+    Levels[] levels ;
 
 
     //کانستراکتور این کلاس
@@ -45,9 +45,9 @@ public class Mission {
     //تابعی برای ایجاد ماموریت های مراحل جدید
     public void createNewMission(){
         this.levelNumber = max_level_number ;
-        this.levels = new Level[levelNumber] ;
+        this.levels = new Levels[levelNumber] ;
         for (int i = 0; i < levelNumber; i++) {
-            this.levels[i] = new Level( coins_at_first[i],max_egg[i],max_feather[i],
+            this.levels[i] = new Levels( coins_at_first[i],max_egg[i],max_feather[i],
                     max_milk[i],max_egg_first_product[i],max_feather_first_product[i],max_milk_first_product[i],
                     max_egg_second_product[i],max_feather_second_product[i],max_milk_second_product[i],
                     max_mission_coins[i],max_hen[i],max_turkey[i],max_buffalo[i],wildAnimals[i],max_time_level[i],
@@ -84,14 +84,14 @@ public class Mission {
             String obj = "" ;
             int j = 0 ;
             this.levelNumber = gson.fromJson(level,int.class);
-            this.levels = new Level[this.levelNumber];
+            this.levels = new Levels[this.levelNumber];
             for (int i = 2; i < lines.size(); i++) {
                 String x = lines.get(i);
                 if(x.equals("[")||x.equals("]")){
 
                 } else if (x.contains("  }")){
                     obj += "  }" ;
-                    Level level1 = gson.fromJson(obj,Level.class);
+                    Levels level1 = gson.fromJson(obj, Levels.class);
                     this.levels[j] = level1 ; j++ ;
                     obj = "" ;
                 }else {

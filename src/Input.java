@@ -29,17 +29,17 @@ public class Input {
 
     private void processWorking(String[] split){
         if(split[1].toLowerCase(Locale.ROOT).equals("mill"))
-            manager.working("Mill");
+            manager.working("mill");
         else if(split[1].toLowerCase(Locale.ROOT).equals("fabric"))
-            manager.working("FabricWeaving");
+            manager.working("fabricweaving");
         else if(split[1].toLowerCase(Locale.ROOT).equals("milk"))
-            manager.working("MilkPacking");
+            manager.working("milkpacking");
         else if(split[1].toLowerCase(Locale.ROOT).equals("bakery"))
-            manager.working("Bakery");
+            manager.working("bakery");
         else if(split[1].toLowerCase(Locale.ROOT).equals("tailoring"))
-            manager.working("Tailoring");
+            manager.working("tailoring");
         else if(split[1].toLowerCase(Locale.ROOT).equals("ice"))
-            manager.working("IceCreamWorkshop");
+            manager.working("icecreamworkshop");
     }
 
     private void processPickingUp(String[] split){

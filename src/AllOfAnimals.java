@@ -7,9 +7,13 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.*;
 
 //کلاسی که بر فعالیت همه حیوانات نظارت دارد
 public class AllOfAnimals {
+
+    LogManager logManager = LogManager.getLogManager();
+    Logger logg = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     //متغیرهای موجود در این کلاس
     String userName ;
@@ -95,7 +99,7 @@ public class AllOfAnimals {
     public void checkAndRemoveOtherAnimals(){
         for (int i = 0; i < this.otherAnimals.size(); i++) {
             if(otherAnimals.get(i).life==0){
-               OtherAnimals animal = otherAnimals.get(i);
+                OtherAnimals animal = otherAnimals.get(i);
                 this.otherAnimals.remove(animal);
             }
         }
@@ -110,25 +114,41 @@ public class AllOfAnimals {
             if(animal.life<50) {
                 //move for food
             }
-                int[] newLoc = newLoc(animal.x,animal.y);
-                int k = 0 ;
-                while (k<10&&!(isEmpty(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1)){
-                    newLoc = newLoc(animal.x,animal.y);
-                }
-                animal.x = newLoc[0] ; animal.y = newLoc[1] ;
+            int[] newLoc = newLoc(animal.x,animal.y);
+            int k = 0 ;
+            while (k<10&&!(isEmpty(newLoc[0],newLoc[1])&&newLoc[0]<=6&&newLoc[1]<=6&&newLoc[0]>=1&&newLoc[1]>=1)){
+                newLoc = newLoc(animal.x,animal.y);
+            }
+            animal.x = newLoc[0] ; animal.y = newLoc[1] ;
 
             if(animal.life<50){
                 for (int j = 0; j < Manager.grasses.size(); j++) {
                     if(animal.x==Manager.grasses.get(i).getRow()&&animal.y==Manager.grasses.get(i).getColumn()){
                         animal.life = 100 ;
-                        ///
-                        ///
-                        ///
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,animal.name+" has feed at "+animal.x+" "+animal.y);
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
                         System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " has feed!");
-                        ///
-                        ///
-                        ///
                         Manager.grasses.get(i).decreaseNumber();
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,"grass decreased at "+animal.x+" "+animal.y);
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
                         if(Manager.grasses.get(i).getNumber()==0){
                             Manager.grasses.remove(i);
                         }
@@ -139,14 +159,19 @@ public class AllOfAnimals {
             animal.makeProduct();
             animal.life-=10 ;
             if(animal.life<=0){
-                ///
-                ///
-                ///
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,animal.name+" has is dead at "+animal.x+" "+animal.y);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
                 System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " is dead!");
                 this.domesticAnimals.remove(i);
-                ///
-                ///
-                ///
             }
 
         }
@@ -218,12 +243,13 @@ public class AllOfAnimals {
                     if(animal.x==Manager.goodsOnGround.get(i).getRow()&&animal.y==Manager.goodsOnGround.get(i).getColumn()){
                         Goods good = Manager.goodsOnGround.get(i);
                         if(good.getSize()<=Manager.getStoreCapacity()){
-                        Manager.getGoodByName(good.getName()).setInventory();
-                        Manager.goodsOnGround.get(i).useItem();
+                            Manager.getGoodByName(good.getName()).setInventory();
+                            String name = good.getName();
+                            Manager.goodsOnGround.remove(i);
+                            // ERROR!
+
                             ///
-                            ///
-                            ///
-                            System.out.println( good.getName()+" was taken to the warehouse!");
+                            System.out.println( name +" was taken to the warehouse!");
                             ///
                             ///
                             ///
@@ -242,9 +268,17 @@ public class AllOfAnimals {
                     WildAnimal animal1 = (WildAnimal) getAnimal("Wild",animal.x,animal.y);
                     animal.life = 0 ;
                     animal1.life = 0 ;
-                    ///
-                    ///
-                    ///
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,"dog fought with  "+animal1.name+" at "+animal.x+animal.y);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                     System.out.println( animal.name + " in location " + animal.x + " , " + animal.y + " fight with " + animal1.name);
                     ///
                     ///
@@ -364,7 +398,7 @@ public class AllOfAnimals {
                 }
                 break;
             default: System.out.println("Wrong type animal!!");
-            break;
+                break;
         }
         return null ;
     }
@@ -472,17 +506,17 @@ public class AllOfAnimals {
     public void cage(int x , int y ){
         WildAnimal animal = (WildAnimal) getAnimal("Wild" , x , y );
         if(animal!=null&&animal.caged==false){
-        animal.caged = true ;
-        animal.life--;
-        if(animal.life==0){
-           ///
-           ///
-           ///
-            System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
-            ///
-            ///
-            ///
-        }
+            animal.caged = true ;
+            animal.life--;
+            if(animal.life==0){
+                ///
+                ///
+                ///
+                System.out.println(animal.name + " in location " + animal.x + " , " + animal.y + " is in cage!");
+                ///
+                ///
+                ///
+            }
         }
     }
 
@@ -518,7 +552,7 @@ public class AllOfAnimals {
         ///
         ///
         ///
-       // writeAnimals();
+        // writeAnimals();
     }
 
 

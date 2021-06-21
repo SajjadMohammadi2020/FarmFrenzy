@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.logging.*;
 
 public class Manager {
 
-    Level level ;
+    Levels level ;
     User user ;
     AllOfAnimals animals ;
     static int passedTurn = 0;
@@ -26,7 +27,10 @@ public class Manager {
     static boolean wellProcess = false;
     final static int TIME_REQUIRED_FOR_WELL = 3;
 
-    Manager(User user , Level level){
+    LogManager logManager = LogManager.getLogManager();
+    Logger logg = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    Manager(User user , Levels level){
         this.user =  user ;
         this.level = level ;
         this.level.setUser(this.user);
@@ -59,18 +63,32 @@ public class Manager {
         goods.add(new Goods("cloth"));
         goods.add(new Goods("iceCream"));
         goods.add(new Goods("bread"));
+        goods.add(new Goods("bear"));
+        goods.add(new Goods("lion"));
+        goods.add(new Goods("tiger"));
         for(Goods goods : goods)
             goods.setPrice(goods.getName());
     }
 
     public void buildMill(){
         if(coins >= 300) {
-            if (!isExisted("Mill")) {
-                workShops.add(new WorkShops("Mill", 150, 4, "egg", "flour"));
+            if (!isExisted("mill")) {
+                workShops.add(new WorkShops("mill", 150, 4, "egg", "flour"));
+                coins -= 300;
                 System.out.println("Mill built successfully!");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
-            coins -= 300;
         }
         else
             System.out.println("Not enough coin!");
@@ -78,9 +96,20 @@ public class Manager {
 
     public void buildFabricWeaving(){
         if(coins >= 300) {
-            if (!isExisted("FabricWeaving")) {
-                workShops.add(new WorkShops("FabricWeaving", 250, 5, "feather", "fabric"));
+            if (!isExisted("fabricweaving")) {
+                workShops.add(new WorkShops("fabricweaving", 250, 5, "feather", "fabric"));
                 System.out.println("Fabric weaving workshop built successfully");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
             coins -= 300;
@@ -91,9 +120,20 @@ public class Manager {
 
     public void buildMilkPacking(){
         if(coins >= 300) {
-            if (!isExisted("MilkPacking")) {
-                workShops.add(new WorkShops("MilkPacking", 400, 6, "milk", "packedMilk"));
+            if (!isExisted("milkpacking")) {
+                workShops.add(new WorkShops("milkpacking", 400, 6, "milk", "packedMilk"));
                 System.out.println("Milk packing workshop built successfully");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
         }
@@ -104,9 +144,20 @@ public class Manager {
 
     public void buildBakery(){
         if(coins >= 400) {
-            if (!isExisted("Bakery")) {
-                workShops.add(new WorkShops("Bakery", 250, 5, "flour", "bread"));
+            if (!isExisted("bakery")) {
+                workShops.add(new WorkShops("bakery", 250, 5, "flour", "bread"));
                 System.out.println("Bakery built successfully");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
             coins -= 400;
@@ -117,9 +168,20 @@ public class Manager {
 
     public void buildTailoring(){
         if(coins >= 400) {
-            if (!isExisted("Tailoring")) {
-                workShops.add(new WorkShops("Tailoring", 400, 6, "fabric", "cloth"));
+            if (!isExisted("tailoring")) {
+                workShops.add(new WorkShops("tailoring", 400, 6, "fabric", "cloth"));
                 System.out.println("Tailoring built successfully");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
             coins -= 400;
@@ -130,9 +192,20 @@ public class Manager {
 
     public void buildIceCreamWorkshop(){
         if(coins >= 400) {
-            if (!isExisted("IceCreamWorkshop")) {
-                workShops.add(new WorkShops("IceCreamWorkshop", 550, 7, "packedMilk", "iceCream"));
+            if (!isExisted("icecreamworkshop")) {
+                workShops.add(new WorkShops("icecreamworkshop", 550, 7, "packedMilk", "iceCream"));
                 System.out.println("Ice cream work shop built successfully");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.get(workShops.size() - 1).getWorkshopName()+" made successfully at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             } else
                 System.out.println("This workshop was made!");
             coins -= 400;
@@ -159,18 +232,33 @@ public class Manager {
 
     public void working(String name){
         WorkShops workShop = getWorkshopByName(name);
-        Goods good = getGoodByName(workShop.getRequiredItem());
-        if(workShop.getIsWorking())
-            System.out.println("This workshop is already working!");
-        else if(workShop.getCost() > coins)
-            System.out.println("You don't have enough coins!");
-        else if(good.getInventory() < 1)
-            System.out.println("You don't have enough item!");
-        else{
-            workShop.setWorkingTrue();
-            workShop.setPassedTimeZero();
-            good.useItem();
-            System.out.println(workShop.getWorkshopName()+" starts working.");
+        if(workShop == null)
+            System.out.println("You don't have this workshop!!!");
+        else {
+            Goods good = getGoodByName(workShop.getRequiredItem());
+            if (workShop.getIsWorking())
+                System.out.println("This workshop is already working!");
+            else if (workShop.getCost() > coins)
+                System.out.println("You don't have enough coins!");
+            else if (good.getInventory() < 1)
+                System.out.println("You don't have enough item!");
+            else {
+                workShop.setWorkingTrue();
+                workShop.setPassedTimeZero();
+                good.useItem();
+                System.out.println(workShop.getWorkshopName() + " starts working.");
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO, workShop.getWorkshopName() + " stars working.It takes " + workShop.getRequiredItem() + " turns..");
+                } catch (Exception e) {
+
+                    System.out.println("error!!!");
+                }
+            }
         }
     }
 
@@ -184,6 +272,17 @@ public class Manager {
     private void checkWorkshops(){
         for(WorkShops workShops : workShops){
             if(workShops.isFinished()){
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,workShops.getWorkshopName()+" finished his work at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
                 goodsOnGround.add(new Goods(workShops.getProduct(),"ground"));
                 goodsOnGround.get(goodsOnGround.size() - 1).setRowAndColumn(workShops.getWorkshopName());
                 workShops.setPassedTimeZero();
@@ -197,6 +296,17 @@ public class Manager {
     private void checkGoods(){
         for(int i=0;i<goodsOnGround.size();i++) {
             if(goodsOnGround.get(i).isExpired()){
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,goodsOnGround.get(i).getName()+" has been expired at "+passedTurn);
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
                 goodsOnGround.remove(i);
                 i--;
             }
@@ -213,8 +323,19 @@ public class Manager {
                     System.out.println(goodsOnGround.get(i).getName()+" added to storehouse.");
                     changeInformationLevel(goodsOnGround.get(i).getName());
                     for(Goods goods : goods){
-                        if(goods.getName().equals(goodsOnGround.get(i).getName()))
+                        if(goods.getName().equals(goodsOnGround.get(i).getName())){
                             goods.setInventory();
+                            try {
+                                FileHandler fh = new FileHandler("logfile.txt", true);
+                                SimpleFormatter sf = new SimpleFormatter();
+                                fh.setFormatter(sf);
+                                logg.addHandler(fh);
+                                logg.setUseParentHandlers(false);
+                                logg.log(Level.INFO,goodsOnGround.get(i).getName()+" added to storehouse!!!");
+                            } catch (Exception e){
+                                System.out.println("error!!!");
+                            }
+                        }
                     }
                     goodsOnGround.remove(i);
                     i--;
@@ -236,6 +357,17 @@ public class Manager {
                         goods.useItem();
                         truckSize += goods.getSize();
                         System.out.println(goods.getName() + " added into the truck.");
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,goods.getName()+" added to truck!!!");
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
                     }
                 }
             }
@@ -253,6 +385,17 @@ public class Manager {
                 for (int i = 0; i < truckItems.size(); i++) {
                     if (truckItems.get(i).getName().equals(name)) {
                         truckSize -= truckItems.get(i).getSize();
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,truckItems.get(i).getName()+" removed from truck!!!");
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
                         truckItems.remove(i);
                         unload = true;
                         i--;
@@ -269,8 +412,20 @@ public class Manager {
     }
 
     public void sendTruck(){
-        if(truckSize > 0)
+        if(truckSize > 0) {
+            try {
+                FileHandler fh = new FileHandler("logfile.txt", true);
+                SimpleFormatter sf = new SimpleFormatter();
+                fh.setFormatter(sf);
+                logg.addHandler(fh);
+                logg.setUseParentHandlers(false);
+                logg.log(Level.INFO,"truck sent to city at "+passedTurn);
+            } catch (Exception e){
+
+                System.out.println("error!!!");
+            }
             isTruckOnWay = true;
+        }
         else
             System.out.println("Truck is empty!!!");
     }
@@ -281,6 +436,17 @@ public class Manager {
                 for (Goods goods : truckItems)
                     coins += goods.getPrice();
                 isTruckOnWay = false;
+                try {
+                    FileHandler fh = new FileHandler("logfile.txt", true);
+                    SimpleFormatter sf = new SimpleFormatter();
+                    fh.setFormatter(sf);
+                    logg.addHandler(fh);
+                    logg.setUseParentHandlers(false);
+                    logg.log(Level.INFO,"truck has arrived from city!");
+                } catch (Exception e){
+
+                    System.out.println("error!!!");
+                }
             }
         }
         else
@@ -295,10 +461,24 @@ public class Manager {
     }
 
     public void well(){
-        if(isWllIsEmpty()) {
+        if(isWllIsEmpty() && !wellProcess) {
             wellPassedTime = 0;
             wellProcess = true;
+            System.out.println("Well filling started!!!");
+            try {
+                FileHandler fh = new FileHandler("logfile.txt", true);
+                SimpleFormatter sf = new SimpleFormatter();
+                fh.setFormatter(sf);
+                logg.addHandler(fh);
+                logg.setUseParentHandlers(false);
+                logg.log(Level.INFO,"well starts to filling at "+passedTurn);
+            } catch (Exception e){
+
+                System.out.println("error!!!");
+            }
         }
+        else if(wellProcess)
+            System.out.println("Well is filling.");
         else
             System.out.println("Well has water!");
 
@@ -313,16 +493,53 @@ public class Manager {
     }
 
     public void planting(int row,int column){
-        if(grasses.size() > 0) {
-            for (Grass grass : grasses) {
-                if (row == grass.getRow() && column == grass.getColumn())
-                    grass.setNumber();
-                else
-                    grasses.add(new Grass(row, column));
+        boolean planted = false;
+        if(well > 0) {
+            if (grasses.size() > 0) {
+                for (int i=0;i<grasses.size() && !planted;i++) {
+                    if (row == grasses.get(i).getRow() && column == grasses.get(i).getColumn()) {
+                        grasses.get(i).setNumber();
+                        well--;
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,"Grass increased at "+row+" "+column);
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
+                        System.out.println("Grass planted...");
+                    }
+                    else {
+                        grasses.add(new Grass(row, column));
+                        well--;
+                        planted = true;
+                        try {
+                            FileHandler fh = new FileHandler("logfile.txt", true);
+                            SimpleFormatter sf = new SimpleFormatter();
+                            fh.setFormatter(sf);
+                            logg.addHandler(fh);
+                            logg.setUseParentHandlers(false);
+                            logg.log(Level.INFO,"New Grass at "+row+" "+column);
+                        } catch (Exception e){
+
+                            System.out.println("error!!!");
+                        }
+                        System.out.println("Grass planted...");
+                    }
+                }
+            } else {
+                grasses.add(new Grass(row, column));
+                well--;
+                System.out.println("Grass planted...");
+                logg.log(Level.INFO,"New Grass at "+row+" "+column);
             }
         }
         else
-            grasses.add(new Grass(row, column));
+            System.out.println("Fill the well and try later...");
     }
 
     public void passTurn(int n){
@@ -330,7 +547,7 @@ public class Manager {
         for(int i=1;i<=n;i++) {
             passedTurn++;
             animals.TurnAllOfAnimals();///
-            showGoodsOnGround();///
+            showGoodsOnGround();
             checkWorkshops();
             checkGoods();
             checkTruck();
@@ -341,8 +558,6 @@ public class Manager {
         System.out.println(passedTurn);
 
     }
-
-
 
     public void levelTurn(){
         String wild = this.level.getWildAnimal();
@@ -360,9 +575,20 @@ public class Manager {
         switch (name){
             case "hen" :
                 if(coins>=DomesticAnimal.henBuyPrice){
-                coins -= DomesticAnimal.henBuyPrice ;
-                this.level.hen++;
-                animals.makeDomesticAnimal(name);
+                    coins -= DomesticAnimal.henBuyPrice ;
+                    this.level.hen++;
+                    animals.makeDomesticAnimal(name);
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,name+" bought at "+passedTurn);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                 }else {
                     System.out.println("Not enough money!");
                 }
@@ -370,6 +596,17 @@ public class Manager {
             case "turkey" :
                 if(coins>=DomesticAnimal.turkeyBuyPrice){
                     coins -= DomesticAnimal.turkeyBuyPrice ;
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,name+" bought at "+passedTurn);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                     this.level.turkey++;
                     animals.makeDomesticAnimal(name);
                 }else {
@@ -379,6 +616,17 @@ public class Manager {
             case "buffalo" :
                 if(coins>=DomesticAnimal.buffaloBuyPrice){
                     coins -= DomesticAnimal.buffaloBuyPrice ;
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,name+" bought at "+passedTurn);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                     this.level.buffalo++;
                     animals.makeDomesticAnimal(name);
                 }else {
@@ -388,6 +636,17 @@ public class Manager {
             case "cat" :
                 if(coins>=OtherAnimals.catBuyPrice){
                     coins -= OtherAnimals.catBuyPrice ;
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,name+" bought at "+passedTurn);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                     animals.makeOtherAnimal(name);
                 }else {
                     System.out.println("Not enough money!");
@@ -396,6 +655,17 @@ public class Manager {
             case "dog" :
                 if(coins>=OtherAnimals.dogBuyPrice){
                     coins -= OtherAnimals.dogBuyPrice ;
+                    try {
+                        FileHandler fh = new FileHandler("logfile.txt", true);
+                        SimpleFormatter sf = new SimpleFormatter();
+                        fh.setFormatter(sf);
+                        logg.addHandler(fh);
+                        logg.setUseParentHandlers(false);
+                        logg.log(Level.INFO,name+" bought at "+passedTurn);
+                    } catch (Exception e){
+
+                        System.out.println("error!!!");
+                    }
                     animals.makeDomesticAnimal(name);
                 }else {
                     System.out.println("Not enough money!");
@@ -480,3 +750,4 @@ public class Manager {
 //    }
 
 }
+

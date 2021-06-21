@@ -1,5 +1,8 @@
+import java.util.Locale;
+
 public class WorkShops {
     private int cost;
+    private int level;
     private int requiredTime;
     private boolean isWorking;
     private String workshopName;
@@ -13,6 +16,7 @@ public class WorkShops {
         this.requiredTime = requiredTime;
         this.requiredItem = requiredItem;
         this.product = product;
+        this.level = 1;
     }
 
     public String getWorkshopName(){return workshopName;}
@@ -38,5 +42,32 @@ public class WorkShops {
             return true;
         else
             return false;
+    }
+
+    public void upgradeWorkshop(String name){
+        if (name.toLowerCase(Locale.ROOT).equals("mill")) {
+            this.requiredTime = 2;
+            this.level = 2;
+        }
+        else if(name.toLowerCase(Locale.ROOT).equals("fabricweaving")){
+            this.requiredTime = 3;
+            this.level = 2;
+        }
+        else if(name.toLowerCase(Locale.ROOT).equals("milkpacking")){
+            this.requiredTime = 3;
+            this.level = 2;
+        }
+        else if(name.toLowerCase(Locale.ROOT).equals("bakery")){
+            this.requiredTime = 3;
+            this.level = 2;
+        }
+        else if(name.toLowerCase(Locale.ROOT).equals("tailoring")){
+            this.requiredTime = 3;
+            this.level = 2;
+        }
+        else if(name.toLowerCase(Locale.ROOT).equals("icecreamworkshop")){
+            this.requiredTime = 4;
+            this.level = 2;
+        }
     }
 }

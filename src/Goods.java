@@ -77,7 +77,6 @@ public class Goods {
         this.name = name ;
         this.row = row ; this.column = col ;this.timeToExpire = EXPIRATION_TIME_FOR_PRIMARY ;
         this.timeOutOfStore =  0 ;  this.size = 1 ; this.type = "primary";
-        this.inventory = 0 ;
         Manager.goodsOnGround.add(this);
     }
 

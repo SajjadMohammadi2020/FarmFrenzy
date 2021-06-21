@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 //کلاس مرحله ( حاوی ماموریت ها و متغیرهای مورد نیاز هر مرحله )
-public class Level {
+public class Levels {
 
     // متغیرهای موجود در این کلاس ( توضیحات هر متغیر در کلاس mission ) آمده است.
     boolean finished ;
@@ -28,23 +28,23 @@ public class Level {
 
 
     //کانستراکتور این کلاس
-    Level(int coinsAtFirst ,
-          int max_egg ,
-          int max_feather ,
-          int max_milk ,
-          int max_egg_first_product ,
-          int max_feather_first_product ,
-          int max_milk_first_product ,
-          int max_egg_second_product ,
-          int max_feather_second_product ,
-          int max_milk_second_product ,
-          int max_mission_coins ,
-          int max_hen ,
-          int max_turkey ,
-          int max_buffalo ,
-          String[][] wildAnimals ,
-          int maxTime ,
-          int coinsForReward){
+    Levels(int coinsAtFirst ,
+           int max_egg ,
+           int max_feather ,
+           int max_milk ,
+           int max_egg_first_product ,
+           int max_feather_first_product ,
+           int max_milk_first_product ,
+           int max_egg_second_product ,
+           int max_feather_second_product ,
+           int max_milk_second_product ,
+           int max_mission_coins ,
+           int max_hen ,
+           int max_turkey ,
+           int max_buffalo ,
+           String[][] wildAnimals ,
+           int maxTime ,
+           int coinsForReward){
         this.coinsAtFirst = coinsAtFirst ;
         this.max_egg = max_egg;
         this.max_feather = max_feather ;
