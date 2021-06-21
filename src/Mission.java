@@ -10,22 +10,22 @@ public class Mission {
 
     //مقادیری که ماموریت های هر مرحله را تعیین میکند .
     public static final int max_level_number = 5; //تعداد کل مراحل
-    public static final int coins_at_first[] = {100,150,200,250,300};//تعداد سکه ها در ابتدای مرحله
-    public static final int max_time_level[] = {100,120,140,160,180};//حداکثر زمان جایزه دار مرحله
-    public static final int coins_for_reward[] = {30,50,70,90,110};//تعداد سکه های جایزه در صورت اتمام در زمان معین
-    public static final int max_egg[] = {5,6,7,8,9} ; //تعداد تخم مرغ های مورد نیاز در هر مرحله
-    public static final int max_feather[] = {2,3,4,5,6};//تعداد تخم پرهای مورد نیاز در هر مرحله
-    public static final int max_milk[] = {1,2,3,4,5};//مقدار شیر مورد نیاز در هر مرحله
-    public static final int max_egg_first_product[] = {4,5,6,7,8} ;//مقدار آرد در مورد نیاز در هر مرحله
-    public static final int max_feather_first_product[] = {3,4,5,6,7} ;//مقدار پارچه مورد نیاز در هر مرحله
-    public static final int max_milk_first_product [] = {2,3,4,5,6};//مقدار شیر پاکتی مورد نیاز در هر مرحله
-    public static final int max_egg_second_product[] = {3,4,5,6,7} ;//مقدار نان مورد نیاز در هر مرحله
-    public static final int max_feather_second_product[] = {3,4,5,6,7} ;//مقدار پیراهن مورد نیاز در هر مرحله
-    public static final int max_milk_second_product [] = {2,3,4,5,6};//مقدار بستنی مورد نیاز در هر مرحله
-    public static final int max_mission_coins[] = {150,160,170,180,190} ;//مقدار سکه مورد نیاز در هر مرحله
-    public static final int max_hen [] = {4,5,6,7,8};//تعداد مرغ مورد نیاز هر مرحله
-    public static final int max_turkey[] = {4,5,6,7,8} ;//تعداد بوقلمون مورد نیاز در هر مرحله
-    public static final int max_buffalo[] = {3,4,5,6,7} ;//تعداد بوفالو مورد نیاز در هر مرحله
+    public static final int coins_at_first[] = {1500,150,200,250,300};//تعداد سکه ها در ابتدای مرحله
+    public static final int max_time_level[] = {0,120,140,160,180};//حداکثر زمان جایزه دار مرحله
+    public static final int coins_for_reward[] = {0,50,70,90,110};//تعداد سکه های جایزه در صورت اتمام در زمان معین
+    public static final int max_egg[] = {0,6,7,8,9} ; //تعداد تخم مرغ های مورد نیاز در هر مرحله
+    public static final int max_feather[] = {0,3,4,5,6};//تعداد تخم پرهای مورد نیاز در هر مرحله
+    public static final int max_milk[] = {0,2,3,4,5};//مقدار شیر مورد نیاز در هر مرحله
+    public static final int max_egg_first_product[] = {0,5,6,7,8} ;//مقدار آرد در مورد نیاز در هر مرحله
+    public static final int max_feather_first_product[] = {0,4,5,6,7} ;//مقدار پارچه مورد نیاز در هر مرحله
+    public static final int max_milk_first_product [] = {0,3,4,5,6};//مقدار شیر پاکتی مورد نیاز در هر مرحله
+    public static final int max_egg_second_product[] = {0,4,5,6,7} ;//مقدار نان مورد نیاز در هر مرحله
+    public static final int max_feather_second_product[] = {0,4,5,6,7} ;//مقدار پیراهن مورد نیاز در هر مرحله
+    public static final int max_milk_second_product [] = {0,3,4,5,6};//مقدار بستنی مورد نیاز در هر مرحله
+    public static final int max_mission_coins[] = {0,160,170,180,190} ;//مقدار سکه مورد نیاز در هر مرحله
+    public static final int max_hen [] = {3,5,6,7,8};//تعداد مرغ مورد نیاز هر مرحله
+    public static final int max_turkey[] = {1,5,6,7,8} ;//تعداد بوقلمون مورد نیاز در هر مرحله
+    public static final int max_buffalo[] = {0,4,5,6,7} ;//تعداد بوفالو مورد نیاز در هر مرحله
     public static final String wildAnimals[][][] = { { {"Lion","2"} , {"Lion","8"} }  ,  { {"Lion","12" } , {"Lion","23" } , {"Lion","35"} } ,
             { {"Lion","15"} , {"Bear","24"} , {"Lion" , "40"} } , { {"Lion","15" } , { "Bear","30" } , {"Tiger","50"}} ,
             { {"Bear","15"} , {"Tiger","35"} , {"Tiger","50"}}};//حیوانات وحشی و زمان فرود آنها در هر مرحله

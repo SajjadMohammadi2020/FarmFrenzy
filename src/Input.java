@@ -63,9 +63,9 @@ public class Input {
         manager.planting(Integer.parseInt(split[1]),Integer.parseInt(split[2]));
     }
 
-    public void run(){
+    public String run(){
         String input;
-        while (!(input = sc.nextLine()).equalsIgnoreCase("LOG OUT")){
+        while ((!(input = sc.nextLine()).toLowerCase(Locale.ROOT).equals("exit"))&&(!(input.toLowerCase(Locale.ROOT).equals("menu")))){
             if(input.toLowerCase(Locale.ROOT).startsWith("build"))
                 processBuilding(input.split("\\s"));
             else if(input.toLowerCase(Locale.ROOT).startsWith("work"))
@@ -93,5 +93,6 @@ public class Input {
                 System.out.println("Input : run : "+"Wrong input!!");
             }
         }
+        return input ;
     }
 }

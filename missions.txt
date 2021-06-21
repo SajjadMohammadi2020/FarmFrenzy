@@ -1,20 +1,21 @@
 5
 [
   {
-    "coinsAtFirst": 100,
-    "max_egg": 5,
-    "max_feather": 2,
-    "max_milk": 1,
-    "max_egg_first_product": 4,
-    "max_feather_first_product": 3,
-    "max_milk_first_product": 2,
-    "max_egg_second_product": 3,
-    "max_feather_second_product": 3,
-    "max_milk_second_product": 2,
-    "max_mission_coins": 150,
-    "max_hen": 4,
-    "max_turkey": 4,
-    "max_buffalo": 3,
+    "finished": false,
+    "coinsAtFirst": 1500,
+    "max_egg": 0,
+    "max_feather": 0,
+    "max_milk": 0,
+    "max_egg_first_product": 0,
+    "max_feather_first_product": 0,
+    "max_milk_first_product": 0,
+    "max_egg_second_product": 0,
+    "max_feather_second_product": 0,
+    "max_milk_second_product": 0,
+    "max_mission_coins": 0,
+    "max_hen": 3,
+    "max_turkey": 1,
+    "max_buffalo": 0,
     "wildAnimals": [
       [
         "Lion",
@@ -25,8 +26,8 @@
         "8"
       ]
     ],
-    "maxTime": 100,
-    "coinsForReward": 30,
+    "maxTime": 0,
+    "coinsForReward": 0,
     "egg": 0,
     "feather": 0,
     "milk": 0,
@@ -39,10 +40,11 @@
     "hen": 0,
     "turkey": 0,
     "buffalo": 0,
-    "coins": 100,
+    "coins": 1500,
     "time": 0
   },
   {
+    "finished": false,
     "coinsAtFirst": 150,
     "max_egg": 6,
     "max_feather": 3,
@@ -89,6 +91,7 @@
     "time": 0
   },
   {
+    "finished": false,
     "coinsAtFirst": 200,
     "max_egg": 7,
     "max_feather": 4,
@@ -135,6 +138,7 @@
     "time": 0
   },
   {
+    "finished": false,
     "coinsAtFirst": 250,
     "max_egg": 8,
     "max_feather": 5,
@@ -181,6 +185,7 @@
     "time": 0
   },
   {
+    "finished": false,
     "coinsAtFirst": 300,
     "max_egg": 9,
     "max_feather": 6,

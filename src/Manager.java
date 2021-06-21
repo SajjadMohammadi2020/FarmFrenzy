@@ -211,6 +211,7 @@ public class Manager {
                 if(storeHasCapacity(goodsOnGround.get(i).getSize())){
                     storeCapacity += goodsOnGround.get(i).getSize();
                     System.out.println(goodsOnGround.get(i).getName()+" added to storehouse.");
+                    changeInformationLevel(goodsOnGround.get(i).getName());
                     for(Goods goods : goods){
                         if(goods.getName().equals(goodsOnGround.get(i).getName()))
                             goods.setInventory();
@@ -325,6 +326,7 @@ public class Manager {
     }
 
     public void passTurn(int n){
+        System.out.println(n);
         for(int i=1;i<=n;i++) {
             passedTurn++;
             animals.TurnAllOfAnimals();///
@@ -415,6 +417,58 @@ public class Manager {
             Goods good = goodsOnGround.get(i);
             System.out.println("Manager : showGoodsOnGround : "+good.getName() + " " + good.getRow() + " " + good.getColumn() );
         }
+    }
+
+    public void changeInformationLevel(String name){
+        switch (name){
+            case "egg" :
+                this.level.egg++;
+                break;
+            case "feather" :
+                this.level.feather++;
+                break;
+            case "milk" :
+                this.level.milk++;
+                break;
+            case "flour" :
+                this.level.egg_first_product++ ;
+                break;
+            case "fabric" :
+                this.level.feather_first_product++;
+                break;
+            case "packedMilk" :
+                this.level.milk_first_product++;
+                break;
+            case "bread" :
+                this.level.egg_second_product++;
+                break;
+            case "cloth" :
+                this.level.feather_second_product++;
+                break;
+            case "ice cream" :
+                this.level.milk_second_product++;
+                break;
+            default:
+                System.out.println("Manager : changeInformationLevel : "+"Wrong product!");
+                break;
+        }
+    }
+
+    public void removeArrayListsManager(){
+        removeArrayList(this.animals.domesticAnimals);
+        removeArrayList(this.animals.wildAnimals);
+        removeArrayList(this.animals.otherAnimals);
+        removeArrayList(Manager.goodsOnGround);
+    }
+
+    void removeArrayList(ArrayList arrayList){
+        while (arrayList.size()!=0){
+            arrayList.remove(0);
+        }
+    }
+
+    void restartLevel(){
+        this.level.restart();
     }
 
 //    public void addProductsToLevel(){

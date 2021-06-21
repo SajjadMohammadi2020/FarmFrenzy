@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Main {
             if(str.equals("")||str.toLowerCase(Locale.ROOT).equals("log out")) {
                 user = allOfUsers.SignUpLogin();
             }
+            System.out.println("CHOOSE:\nSTART\nSETTINGS\nLOG OUT");
             str = sc.nextLine();
             if(str.toLowerCase(Locale.ROOT).startsWith("start")){
                 int level = Integer.parseInt(str.split("\\s")[1]);
@@ -20,14 +22,24 @@ public class Main {
                 Manager manager = new Manager(user,mission.levels[level-1]);
                 Input input = new Input(manager);
                 manager.makingGood();
-                input.run();}else {
+                String menu = input.run();
+                allOfUsers.writeFile();
+                if(menu.toLowerCase(Locale.ROOT).equals("exit")){
+                    str = "exit" ;
+                }else if(menu.toLowerCase(Locale.ROOT).equals("menu")){
+                    manager.removeArrayListsManager();
+                    manager.restartLevel();
+                }
+                }else {
                     System.out.println("Main : main : "+"Sorry! You dont have access this level!");
                 }
             }else if(str.toLowerCase(Locale.ROOT).equals("settings")){
 
             }else if(str.toLowerCase(Locale.ROOT).equals("exit")){
 
-            }else {
+            }else if(str.toLowerCase(Locale.ROOT).equals("log out")){
+
+            }else  {
                 System.out.println("Main : main : "+"wrong input!!");
             }
         }
